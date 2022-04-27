@@ -10,8 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bakis">
         <activity
+            android:name=".AddEditExercise"
+            android:parentActivityName=".MainActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:theme="@style/Theme.Bakis.NoActionBar"
+            android:exported="true"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

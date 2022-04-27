@@ -3,9 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Vartotojas/Desktop/7 Semestras/Prohraming of the Smart Devices/bakis/app/src/main/res/drawable/ic_add.xml" value="0.3828125" />
+        <entry key="..\:/Users/Vartotojas/Desktop/7 Semestras/Prohraming of the Smart Devices/bakis/app/src/main/res/drawable/ic_close.xml" value="0.22135416666666666" />
+        <entry key="..\:/Users/Vartotojas/Desktop/7 Semestras/Prohraming of the Smart Devices/bakis/app/src/main/res/layout/activity_add_exercise.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/Vartotojas/Desktop/7 Semestras/Prohraming of the Smart Devices/bakis/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/Users/Vartotojas/Desktop/7 Semestras/Prohraming of the Smart Devices/bakis/app/src/main/res/layout/exercise_item.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/Vartotojas/Desktop/7 Semestras/Prohraming of the Smart Devices/bakis/app/src/main/res/layout/fragment_2.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/Vartotojas/Desktop/7 Semestras/Prohraming of the Smart Devices/bakis/app/src/main/res/layout/fragment_3.xml" value="0.17806484295845998" />
+        <entry key="..\:/Users/Vartotojas/Desktop/7 Semestras/Prohraming of the Smart Devices/bakis/app/src/main/res/layout/fragment_add_exercise.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/Vartotojas/Desktop/7 Semestras/Prohraming of the Smart Devices/bakis/app/src/main/res/layout/fragment_allCourses.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/Vartotojas/Desktop/7 Semestras/Prohraming of the Smart Devices/bakis/app/src/main/res/layout/fragment_allExercises.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/Vartotojas/Desktop/7 Semestras/Prohraming of the Smart Devices/bakis/app/src/main/res/layout/fragment_allcourses.xml" value="0.13541666666666666" />
@@ -18,6 +23,7 @@
         <entry key="..\:/Users/Vartotojas/Desktop/7 Semestras/Prohraming of the Smart Devices/bakis/app/src/main/res/layout/fragment_message.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/Vartotojas/Desktop/7 Semestras/Prohraming of the Smart Devices/bakis/app/src/main/res/layout/fragment_statistics.xml" value="0.17806484295845998" />
         <entry key="..\:/Users/Vartotojas/Desktop/7 Semestras/Prohraming of the Smart Devices/bakis/app/src/main/res/layout/nav_header.xml" value="0.17806484295845998" />
+        <entry key="..\:/Users/Vartotojas/Desktop/7 Semestras/Prohraming of the Smart Devices/bakis/app/src/main/res/menu/add_exercise_menu.xml" value="0.24259259259259258" />
         <entry key="..\:/Users/Vartotojas/Desktop/7 Semestras/Prohraming of the Smart Devices/bakis/app/src/main/res/menu/bottom_menu.xml" value="0.20520833333333333" />
         <entry key="..\:/Users/Vartotojas/Desktop/7 Semestras/Prohraming of the Smart Devices/bakis/app/src/main/res/menu/drawer_menu.xml" value="0.26573426573426573" />
       </map>

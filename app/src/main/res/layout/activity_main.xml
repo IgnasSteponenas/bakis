@@ -27,13 +27,15 @@
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-            android:layout_above="@+id/bottom_navigation"/>
+        <!--android:layout_marginBottom="70dp"-->
+
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <!--<RelativeLayout
+        android:id="@+id/nav_bottom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
@@ -42,8 +44,7 @@
             android:layout_alignParentBottom="true"
             app:menu="@menu/bottom_menu"
             android:background="?android:attr/windowBackground"/>
-
-    </RelativeLayout>
+    </RelativeLayout>-->
 
 
     <com.google.android.material.navigation.NavigationView

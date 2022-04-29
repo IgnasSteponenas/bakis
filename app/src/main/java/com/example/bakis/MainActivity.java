@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         //bottom nav
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
-        bottomNav.setOnNavigationItemSelectedListener(navListener);
+        /*BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);*/
 
         //pradinis langas
         if(savedInstanceState == null) {
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
 
-    private  BottomNavigationView.OnNavigationItemSelectedListener navListener =
+    /*private  BottomNavigationView.OnNavigationItemSelectedListener navListener =
             new BottomNavigationView.OnNavigationItemSelectedListener(){
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item){
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     return true;
                 }
-            };
+            };*/
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -99,6 +99,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_allExercises:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new AllExercises()).commit();
+                break;
+            case R.id.nav_createdExercises:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new CreatedExercises()).commit();
                 break;
             case R.id.changeLanguage:
                 Toast.makeText(this, "change yra", Toast.LENGTH_SHORT).show();

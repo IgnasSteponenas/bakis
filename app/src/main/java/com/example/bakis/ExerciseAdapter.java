@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.ExerciseHolder> {
     private List<Exercise> exercises = new ArrayList<>();
     private OnItemClickListener listener;
@@ -29,6 +31,10 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
         Exercise currentExercise = exercises.get(position);
         holder.textViewTitle.setText(currentExercise.getTitle());
         holder.textViewDescription.setText(currentExercise.getDescription());
+        if(currentExercise.getGif()==0)//default gif
+            holder.gifImageView.setImageResource(R.drawable.defaultgif);
+        else
+            holder.gifImageView.setImageResource(currentExercise.getGif());
     }
 
     @Override
@@ -48,11 +54,13 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
     class ExerciseHolder extends RecyclerView.ViewHolder {
         private TextView textViewTitle;
         private TextView textViewDescription;
+        private GifImageView gifImageView;
 
         public ExerciseHolder(@NonNull View itemView) {
             super(itemView);
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             textViewDescription = itemView.findViewById(R.id.text_view_description);
+            gifImageView = itemView.findViewById(R.id.gif_image_view);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

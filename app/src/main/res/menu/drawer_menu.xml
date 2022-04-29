@@ -6,11 +6,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_allCourses"
-            android:icon="@drawable/ic_hiking"
+            android:icon="@drawable/ic_run"
             android:title="All courses" />
         <item
             android:id="@+id/nav_createdCourses"
-            android:icon="@drawable/ic_add"
+            android:icon="@drawable/ic_added"
             android:title="My created courses" />
         <item
             android:id="@+id/nav_likedCourses"
@@ -24,6 +24,10 @@
             android:id="@+id/nav_allExercises"
             android:icon="@drawable/ic_run"
             android:title="All exercises" />
+        <item
+            android:id="@+id/nav_createdExercises"
+            android:icon="@drawable/ic_added"
+            android:title="My created exercises" />
     </group>
 
     <item android:title="Other">

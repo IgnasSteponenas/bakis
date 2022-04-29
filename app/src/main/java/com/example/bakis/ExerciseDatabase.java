@@ -44,9 +44,18 @@ public abstract class ExerciseDatabase extends RoomDatabase {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            exerciseDao.insert(new Exercise("title 1", "desc 1"));
-            exerciseDao.insert(new Exercise("title 2", "desc 2"));
-            exerciseDao.insert(new Exercise("title 3", "desc 3"));
+            exerciseDao.insert(new Exercise("title 4", "desc 4", R.drawable.thanos4, null, false));
+            exerciseDao.insert(new Exercise("title 3", "desc 3", R.drawable.thanos3, null, false));
+            exerciseDao.insert(new Exercise("title 2", "desc 2", R.drawable.thanos2, null, false));
+            exerciseDao.insert(new Exercise("title 1", "desc 1", R.drawable.thanos1, null, false));
+            exerciseDao.insert(new Exercise("title 8", "desc 8", R.drawable.thanos4, null, false));
+            exerciseDao.insert(new Exercise("title 7", "desc 7", R.drawable.thanos3, null, false));
+            exerciseDao.insert(new Exercise("title 6", "desc 6", R.drawable.thanos2, null, false));
+            exerciseDao.insert(new Exercise("title 5", "desc 5", R.drawable.thanos1, null, false));
+            exerciseDao.insert(new Exercise("title 12", "desc 12", R.drawable.thanos4, null, false));
+            exerciseDao.insert(new Exercise("title 11", "desc 11", R.drawable.thanos3, null, false));
+            exerciseDao.insert(new Exercise("title 10", "desc 10", R.drawable.thanos2, null, false));
+            exerciseDao.insert(new Exercise("title 9", "desc 9", R.drawable.thanos1, null, false));
 
             return null;
         }

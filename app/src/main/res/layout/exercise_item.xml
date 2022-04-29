@@ -11,22 +11,35 @@
         android:layout_height="wrap_content"
         android:padding="8dp">
 
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/gif_image_view"
+            android:layout_width="102dp"
+            android:layout_height="70dp"
+            android:layout_alignParentStart="true" />
+            <!--android:src="@drawable/testgif" -->
+
         <TextView
             android:id="@+id/text_view_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Title"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/gif_image_view"
+            android:ellipsize="end"
             android:maxLines="1"
-            android:layout_alignParentStart="true"
-            android:ellipsize="end"/>
+            android:paddingLeft="8dp"
+            android:text="Title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
             android:id="@+id/text_view_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/text_view_title"
-            android:text="Description"/>
+            android:layout_toEndOf="@id/gif_image_view"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:paddingLeft="8dp"
+            android:text="Description" />
 
     </RelativeLayout>
 

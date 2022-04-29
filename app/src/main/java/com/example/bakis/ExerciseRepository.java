@@ -11,11 +11,13 @@ public class ExerciseRepository {
 
     private ExerciseDao exerciseDao;
     private LiveData<List<Exercise>> allExercises;
+    private LiveData<List<Exercise>> createdExercises;
 
     public ExerciseRepository(Application application){
         ExerciseDatabase database = ExerciseDatabase.getInstance(application);
         exerciseDao = database.exerciseDao();
         allExercises = exerciseDao.getAllExercises();
+        createdExercises = exerciseDao.getUserCreatedExercises();
     }
 
     public void insert(Exercise exercise){
@@ -32,6 +34,10 @@ public class ExerciseRepository {
 
     public LiveData<List<Exercise>> getAllExercises() {
         return allExercises;
+    }
+
+    public LiveData<List<Exercise>> getUserCreatedExercises() {
+        return createdExercises;
     }
 
     private static class InsertExerciseAsyncTask extends AsyncTask<Exercise, Void, Void>{

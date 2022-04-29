@@ -23,4 +23,7 @@ public interface ExerciseDao {
 
     @Query("SELECT * FROM exercise_table ORDER BY id DESC")
     LiveData<List<Exercise>> getAllExercises();
+
+    @Query("SELECT * FROM exercise_table WHERE createdByUser = 1 ORDER BY id DESC")
+    LiveData<List<Exercise>> getUserCreatedExercises();
 }

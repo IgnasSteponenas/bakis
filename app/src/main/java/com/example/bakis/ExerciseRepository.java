@@ -13,11 +13,18 @@ public class ExerciseRepository {
     private LiveData<List<Exercise>> allExercises;
     private LiveData<List<Exercise>> createdExercises;
 
+    private LiveData<List<Course>> allCourses;
+    private LiveData<List<CourseWithExercises>> allExercisesOfCourse;
+    private LiveData<List<Course>> allCoursesOfExercise;
+
     public ExerciseRepository(Application application){
         ExerciseDatabase database = ExerciseDatabase.getInstance(application);
         exerciseDao = database.exerciseDao();
         allExercises = exerciseDao.getAllExercises();
         createdExercises = exerciseDao.getUserCreatedExercises();
+
+        allCourses = exerciseDao.getAllCourses();
+        allExercisesOfCourse = exerciseDao.getAllExercisesOfCourse(1);
     }
 
     public void insert(Exercise exercise){
@@ -39,6 +46,12 @@ public class ExerciseRepository {
     public LiveData<List<Exercise>> getUserCreatedExercises() {
         return createdExercises;
     }
+
+    public LiveData<List<Course>> getAllCourses(){return allCourses;}
+
+    public LiveData<List<CourseWithExercises>> getAllExercisesOfCourse(int courseId){return allExercisesOfCourse;}
+
+    //public LiveData<List<ExerciseWithCourses>> getAllCoursesOfExercise(int exerciseId){return allCoursesOfExercise;}*/
 
     private static class InsertExerciseAsyncTask extends AsyncTask<Exercise, Void, Void>{
         private ExerciseDao exerciseDao;

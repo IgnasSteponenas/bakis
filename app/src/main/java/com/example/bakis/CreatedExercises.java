@@ -82,7 +82,7 @@ public class CreatedExercises extends Fragment {
             @Override
             public void onItemClick(Exercise exercise) {
                 Intent intent = new Intent(context, AddEditExercise.class);
-                intent.putExtra(AddEditExercise.EXTRA_ID, exercise.getId());
+                intent.putExtra(AddEditExercise.EXTRA_ID, exercise.getExerciseId());
                 intent.putExtra(AddEditExercise.EXTRA_TITLE, exercise.getTitle());
                 intent.putExtra(AddEditExercise.EXTRA_DESCRIPTION, exercise.getDescription());
                 intent.putExtra(AddEditExercise.EXTRA_GIF, exercise.getUri());
@@ -118,7 +118,7 @@ public class CreatedExercises extends Fragment {
             String uri = data.getStringExtra(AddEditExercise.EXTRA_GIF);
 
             Exercise exercise = new Exercise(title, description, 0, uri, true);
-            exercise.setId(id);
+            exercise.setExerciseId(id);
             exerciseViewModel.update(exercise);
 
             Toast.makeText(context, "Exercise updated", Toast.LENGTH_SHORT).show();

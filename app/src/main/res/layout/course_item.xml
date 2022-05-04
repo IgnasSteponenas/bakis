@@ -11,35 +11,34 @@
         android:layout_height="wrap_content"
         android:padding="8dp">
 
-        <pl.droidsonroids.gif.GifImageView
-            android:id="@+id/gif_image_view"
-            android:layout_width="102dp"
-            android:layout_height="70dp"
-            android:layout_alignParentStart="true" />
-            <!--android:src="@drawable/testgif" -->
-
         <TextView
-            android:id="@+id/text_view_title"
-            android:layout_width="wrap_content"
+            android:id="@+id/text_view_course_title"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@id/gif_image_view"
-            android:ellipsize="end"
-            android:maxLines="1"
+            android:layout_alignParentStart="true"
             android:paddingLeft="8dp"
+            android:singleLine="true"
             android:text="@string/title"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
-            android:id="@+id/text_view_description"
+            android:id="@+id/text_view_exercise_number"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/text_view_title"
-            android:layout_toEndOf="@id/gif_image_view"
+            android:layout_below="@+id/text_view_course_title"
             android:ellipsize="end"
             android:maxLines="2"
             android:paddingLeft="8dp"
-            android:text="@string/description" />
+            android:text="@string/number_of_exercises" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_view_course_title"
+            android:layout_toEndOf="@+id/text_view_exercise_number"
+            android:ellipsize="end"
+            android:paddingLeft="8dp"
+            android:text="@string/number_of_exercises_text" />
 
     </RelativeLayout>
 

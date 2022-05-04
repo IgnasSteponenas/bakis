@@ -3,13 +3,19 @@ package com.example.bakis;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
+import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -105,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                         new CreatedExercises()).commit();
                 break;
             case R.id.changeLanguage:
-                Toast.makeText(this, "change yra", Toast.LENGTH_SHORT).show();
+                //handled with showPopup
                 break;
             case R.id.reminders:
                 Toast.makeText(this, "reminders yra", Toast.LENGTH_SHORT).show();

@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey;
 public class Exercise {
 
     @PrimaryKey(autoGenerate = true)
-    private int id;
+    private int exerciseId;
     private String title;
     private String description;
     private int gif;
@@ -24,12 +24,12 @@ public class Exercise {
         this.createdByUser = createdByUser;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setExerciseId(int exerciseId) {
+        this.exerciseId = exerciseId;
     }
 
-    public int getId() {
-        return id;
+    public int getExerciseId() {
+        return exerciseId;
     }
 
     public String getTitle() {

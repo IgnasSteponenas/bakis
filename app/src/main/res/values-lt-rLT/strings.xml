@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">bakis</string>
+    <string name="navigation_drawer_open">Atidaryti naršymo meniu</string>
+    <string name="navigation_drawer_close">Uždaryti naršymo meniu</string>
+    <string name="hello_blank_fragment">Labas tuščias fragmente</string>
+    <string name="test">testas</string>
+    <string name="all_courses">Visi kursai</string>
+    <string name="my_created_courses">Mano sukurti kursai</string>
+    <string name="my_liked_courses">Man patinkę kursai</string>
+    <string name="statistics">Statistikos</string>
+    <string name="all_exercises">Visi pratimai</string>
+    <string name="my_created_exercises">Mano sukurti pratimai</string>
+    <string name="change_language">Pakeisti kalbą</string>
+    <string name="reminders">Priminimai</string>
+    <string name="login">Prisijungti</string>
+    <string name="save">Išsaugoti</string>
+    <string name="title">Pavadinimas</string>
+    <string name="description">Aprašymas</string>
+    <string name="number_of_exercises">0</string>
+    <string name="number_of_exercises_text">Pratimai</string>
+</resources>

@@ -13,11 +13,17 @@ public class ExerciseViewModel extends AndroidViewModel {
     private LiveData<List<Exercise>> allExercises;
     private LiveData<List<Exercise>> userCreatedExercises;
 
+    private LiveData<List<Course>> allCourses;
+    private LiveData<List<CourseWithExercises>> allExercisesOfCourse;
+
     public ExerciseViewModel(@NonNull Application application) {
         super(application);
         repository = new ExerciseRepository(application);
         allExercises = repository.getAllExercises();
         userCreatedExercises = repository.getUserCreatedExercises();
+
+        allExercisesOfCourse = repository.getAllExercisesOfCourse(1);
+        allCourses = repository.getAllCourses();
     }
 
     public void insert(Exercise exercise){
@@ -39,4 +45,9 @@ public class ExerciseViewModel extends AndroidViewModel {
     public LiveData<List<Exercise>> getUserCreatedExercises() {
         return userCreatedExercises;
     }
+
+
+    public LiveData<List<CourseWithExercises>> getAllExercisesOfCourse(){return allExercisesOfCourse;}
+    public LiveData<List<Course>> getAllCourses(){return allCourses;}
+
 }

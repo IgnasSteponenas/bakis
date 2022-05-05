@@ -15,4 +15,10 @@ public class CourseWithExercises {
             associateBy = @Junction(CourseExerciseCrossRef.class)
     )
     public List<Exercise> exercises;
+    /*public int exerciseCount;
+
+    {
+        assert exercises != null;
+        exerciseCount = exercises.size();
+    }*/
 }

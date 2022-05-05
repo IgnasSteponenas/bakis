@@ -22,8 +22,8 @@ public class ExerciseViewModel extends AndroidViewModel {
         allExercises = repository.getAllExercises();
         userCreatedExercises = repository.getUserCreatedExercises();
 
-        allExercisesOfCourse = repository.getAllExercisesOfCourse(1);
-        allCourses = repository.getAllCourses();
+        //allExercisesOfCourse = repository.getAllExercisesOfCourse(1);
+
     }
 
     public void insert(Exercise exercise){
@@ -47,7 +47,7 @@ public class ExerciseViewModel extends AndroidViewModel {
     }
 
 
-    public LiveData<List<CourseWithExercises>> getAllExercisesOfCourse(){return allExercisesOfCourse;}
-    public LiveData<List<Course>> getAllCourses(){return allCourses;}
+    //public LiveData<List<CourseWithExercises>> getAllExercisesOfCourse(){return allExercisesOfCourse;}
+
 
 }

@@ -20,7 +20,8 @@ import java.util.List;
 
 public class AllCourses extends Fragment {
 
-    private ExerciseViewModel exerciseViewModel;
+    private CourseViewModel courseViewModel;
+    private CourseExerciseCrossRefViewModel courseExerciseCrossRefViewModel;
     //public static final int REVIEW_EXERCISE_REQUEST = 3;
     private Context context;
 
@@ -39,25 +40,23 @@ public class AllCourses extends Fragment {
         CourseAdapter adapter = new CourseAdapter();
         recyclerView.setAdapter(adapter);
 
-        exerciseViewModel = new ViewModelProvider(this).get(ExerciseViewModel.class);
-        exerciseViewModel.getAllCourses().observe(getViewLifecycleOwner(), new Observer<List<Course>>() {
+        courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
+        courseViewModel.getAllCourses().observe(getViewLifecycleOwner(), new Observer<List<Course>>() {
             @Override
             public void onChanged(List<Course> courses) {
                 adapter.setCourses(courses);
-
             }
         });
 
-        /*adapter.setOnItemClickListener(new ExerciseAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new CourseAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(Exercise exercise) {
-                Intent intent = new Intent(context, ReviewExercise.class);
-                intent.putExtra(ReviewExercise.EXTRA_TITLE, exercise.getTitle());
-                intent.putExtra(ReviewExercise.EXTRA_DESCRIPTION, exercise.getDescription());
-                intent.putExtra(ReviewExercise.EXTRA_GIF, exercise.getGif());
+            public void onItemClick(Course course) {
+                Intent intent = new Intent(context, ReviewCourse.class);
+                intent.putExtra(ReviewCourse.EXTRA_COURSE_TITLE, course.getTitle());
+                intent.putExtra(ReviewCourse.EXTRA_COURSE_ID, String.valueOf(course.getCourseId()));
                 startActivity(intent);
             }
-        });*/
+        });
 
         return view;
     }

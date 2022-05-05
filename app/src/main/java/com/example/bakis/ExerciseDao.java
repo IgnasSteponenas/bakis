@@ -28,20 +28,14 @@ public interface ExerciseDao {
     @Query("SELECT * FROM exercise_table WHERE createdByUser = 1 ORDER BY exerciseId DESC")
     LiveData<List<Exercise>> getUserCreatedExercises();
 //////////////////////////////////////////
-    @Insert
+    /*@Insert
     void insertCourse(Course course);
 
     @Insert
     void insertCourseExerciseCrossRef(CourseExerciseCrossRef crossRef);
 
     @Query("SELECT * FROM course_table ORDER BY courseId DESC")
-    LiveData<List<Course>> getAllCourses();
+    LiveData<List<Course>> getAllCourses();*/
 
-    @Transaction
-    @Query("SELECT * FROM course_table WHERE courseId = :courseId ")
-    LiveData<List<CourseWithExercises>> getAllExercisesOfCourse(int courseId);
 
-    @Transaction
-    @Query("SELECT * FROM exercise_table WHERE exerciseId = :exerciseId ")
-    LiveData<List<ExerciseWithCourses>> getAllCoursesOfExercise(int exerciseId);
 }

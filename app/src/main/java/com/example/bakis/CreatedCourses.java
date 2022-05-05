@@ -17,7 +17,7 @@ import java.util.List;
 
 public class CreatedCourses extends Fragment {
 
-    private ExerciseViewModel exerciseViewModel;
+    private CourseExerciseCrossRefViewModel courseExerciseCrossRefViewModel;
     public static final int REVIEW_EXERCISE_REQUEST = 3;
     private Context context;
 
@@ -36,8 +36,8 @@ public class CreatedCourses extends Fragment {
         ExerciseAdapter adapter = new ExerciseAdapter();
         recyclerView.setAdapter(adapter);
 
-        exerciseViewModel = new ViewModelProvider(this).get(ExerciseViewModel.class);
-        exerciseViewModel.getAllExercisesOfCourse().observe(getViewLifecycleOwner(), new Observer<List<CourseWithExercises>>() {
+        courseExerciseCrossRefViewModel = new ViewModelProvider(this).get(CourseExerciseCrossRefViewModel.class);
+        courseExerciseCrossRefViewModel.getAllExercisesOfCourse(2).observe(getViewLifecycleOwner(), new Observer<List<CourseWithExercises>>() {
             @Override
             public void onChanged(List<CourseWithExercises> course) {
                 adapter.setExercises(course.get(0).exercises);
@@ -54,7 +54,6 @@ public class CreatedCourses extends Fragment {
                 startActivity(intent);
             }
         });*/
-
         return view;
     }
 }

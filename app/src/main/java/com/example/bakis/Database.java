@@ -4,28 +4,26 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
-import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import java.util.List;
-
 import kotlin.jvm.Volatile;
 
-@Database(entities = {Exercise.class, Course.class, CourseExerciseCrossRef.class}, version = 2)
-public abstract class ExerciseDatabase extends RoomDatabase {
+@androidx.room.Database(entities = {Exercise.class, Course.class, CourseExerciseCrossRef.class}, version = 2)
+public abstract class Database extends RoomDatabase {
 
     @Volatile
-    private static ExerciseDatabase instance;
+    private static Database instance;
 
     public abstract ExerciseDao exerciseDao();
+    public abstract CourseDao courseDao();
+    public abstract CourseExerciseCrossRefDao courseExerciseCrossRefDao();
 
-    public static synchronized  ExerciseDatabase getInstance(Context context){
+    public static synchronized Database getInstance(Context context){
         if (instance == null){
             instance = Room.databaseBuilder(context.getApplicationContext(),
-                    ExerciseDatabase.class, "exercise_database")
+                    Database.class, "database")
                     .fallbackToDestructiveMigration()
                     .addCallback(roomCallback)
                     .build();
@@ -43,9 +41,13 @@ public abstract class ExerciseDatabase extends RoomDatabase {
 
     private static class PopulateDbAsyncTask extends AsyncTask<Void, Void, Void>{
         private ExerciseDao exerciseDao;
+        private CourseDao courseDao;
+        private CourseExerciseCrossRefDao courseExerciseCrossRefDao;
 
-        private PopulateDbAsyncTask(ExerciseDatabase db){
+        private PopulateDbAsyncTask(Database db){
             exerciseDao = db.exerciseDao();
+            courseDao = db.courseDao();
+            courseExerciseCrossRefDao = db.courseExerciseCrossRefDao();
         }
 
         @Override
@@ -63,17 +65,15 @@ public abstract class ExerciseDatabase extends RoomDatabase {
             exerciseDao.insert(new Exercise("title 10", "desc 10", R.drawable.thanos2, null, false));
             exerciseDao.insert(new Exercise("title 9", "desc 9", R.drawable.thanos1, null, false));
 
+            courseDao.insertCourse(new Course("course1", false, true));
+            courseDao.insertCourse(new Course("course2", false, false));
+            courseDao.insertCourse(new Course("course3", false, false));
+            courseDao.insertCourse(new Course("course4", false, true));
 
-            exerciseDao.insertCourse(new Course("course1", false));
-            exerciseDao.insertCourse(new Course("course2", false));
-            exerciseDao.insertCourse(new Course("course3", false));
-            exerciseDao.insertCourse(new Course("course4", false));
-
-
-            exerciseDao.insertCourseExerciseCrossRef(new CourseExerciseCrossRef(1, 1));
-            exerciseDao.insertCourseExerciseCrossRef(new CourseExerciseCrossRef(1, 2));
-            exerciseDao.insertCourseExerciseCrossRef(new CourseExerciseCrossRef(1, 3));
-            exerciseDao.insertCourseExerciseCrossRef(new CourseExerciseCrossRef(1, 4));
+            courseExerciseCrossRefDao.insertCourseExerciseCrossRef(new CourseExerciseCrossRef(1, 1, 20));
+            courseExerciseCrossRefDao.insertCourseExerciseCrossRef(new CourseExerciseCrossRef(1, 2, 15));
+            courseExerciseCrossRefDao.insertCourseExerciseCrossRef(new CourseExerciseCrossRef(1, 3, 32));
+            courseExerciseCrossRefDao.insertCourseExerciseCrossRef(new CourseExerciseCrossRef(1, 4, 10));
 
             //LiveData<List<CourseWithExercises>> courseWithExercises = exerciseDao.getAllExercisesOfCourse(1);
 

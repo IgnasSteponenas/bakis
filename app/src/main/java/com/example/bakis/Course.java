@@ -14,12 +14,22 @@ public class Course {
 
     private String title;
     private boolean createdByUser;
+    private boolean liked;
     //private List<Exercise> courseExercises;
     //private int[] repeats;
 
-    public Course(String title, boolean createdByUser) {
+    public Course(String title, boolean createdByUser, boolean liked) {
         this.title = title;
         this.createdByUser = createdByUser;
+        this.liked = liked;
+    }
+
+    public boolean isLiked() {
+        return liked;
+    }
+
+    public void setLiked(boolean liked) {
+        this.liked = liked;
     }
 
     public void setCourseId(int courseId) {

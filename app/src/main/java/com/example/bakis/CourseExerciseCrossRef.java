@@ -6,10 +6,12 @@ import androidx.room.Entity;
 public class CourseExerciseCrossRef {
     private int courseId;
     private int exerciseId;
+    private int repeats;
 
-    public CourseExerciseCrossRef(int courseId, int exerciseId) {
+    public CourseExerciseCrossRef(int courseId, int exerciseId, int repeats) {
         this.courseId = courseId;
         this.exerciseId = exerciseId;
+        this.repeats = repeats;
     }
 
     public int getCourseId() {
@@ -26,5 +28,13 @@ public class CourseExerciseCrossRef {
 
     public void setExerciseId(int exerciseId) {
         this.exerciseId = exerciseId;
+    }
+
+    public int getRepeats() {
+        return repeats;
+    }
+
+    public void setRepeats(int repeats) {
+        this.repeats = repeats;
     }
 }

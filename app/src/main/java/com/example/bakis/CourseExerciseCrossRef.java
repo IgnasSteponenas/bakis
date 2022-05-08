@@ -7,11 +7,13 @@ public class CourseExerciseCrossRef {
     private int courseId;
     private int exerciseId;
     private int repeats;
+    private int timePerRepeat;
 
-    public CourseExerciseCrossRef(int courseId, int exerciseId, int repeats) {
+    public CourseExerciseCrossRef(int courseId, int exerciseId, int repeats, int timePerRepeat) {
         this.courseId = courseId;
         this.exerciseId = exerciseId;
         this.repeats = repeats;
+        this.timePerRepeat = timePerRepeat;
     }
 
     public int getCourseId() {
@@ -36,5 +38,13 @@ public class CourseExerciseCrossRef {
 
     public void setRepeats(int repeats) {
         this.repeats = repeats;
+    }
+
+    public int getTimePerRepeat() {
+        return timePerRepeat;
+    }
+
+    public void setTimePerRepeat(int timePerRepeat) {
+        this.timePerRepeat = timePerRepeat;
     }
 }

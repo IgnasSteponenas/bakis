@@ -31,6 +31,7 @@ public class CreatedExercises extends Fragment {
     public static final int EDIT_EXERCISE_REQUEST = 2;
 
     private ExerciseViewModel exerciseViewModel;
+    private CourseExerciseCrossRefViewModel courseExerciseCrossRefViewModel;
     private Context context;
 
     @Nullable
@@ -56,6 +57,8 @@ public class CreatedExercises extends Fragment {
         ExerciseAdapter adapter = new ExerciseAdapter();
         recyclerView.setAdapter(adapter);
 
+        courseExerciseCrossRefViewModel = new ViewModelProvider(this).get(CourseExerciseCrossRefViewModel.class);
+
         exerciseViewModel = new ViewModelProvider(this).get(ExerciseViewModel.class);
         exerciseViewModel.getUserCreatedExercises().observe(getViewLifecycleOwner(), new Observer<List<Exercise>>() {
             @Override
@@ -73,6 +76,10 @@ public class CreatedExercises extends Fragment {
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+                Exercise exercise = adapter.getExerciseAt(viewHolder.getAdapterPosition());
+
+                courseExerciseCrossRefViewModel.deleteByExerciseId(exercise.getExerciseId());
+
                 exerciseViewModel.delete(adapter.getExerciseAt(viewHolder.getAdapterPosition()));
                 Toast.makeText(context, "Exercise deleted", Toast.LENGTH_SHORT).show();
             }

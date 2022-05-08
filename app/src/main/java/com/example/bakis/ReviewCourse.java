@@ -55,13 +55,13 @@ public class ReviewCourse extends AppCompatActivity {
         ExerciseAdapter adapter = new ExerciseAdapter();
         recyclerView.setAdapter(adapter);
 
-        courseExerciseCrossRefViewModel = new ViewModelProvider(this).get(CourseExerciseCrossRefViewModel.class);
+        /*courseExerciseCrossRefViewModel = new ViewModelProvider(this).get(CourseExerciseCrossRefViewModel.class);
         courseExerciseCrossRefViewModel.getAllExercisesOfCourse(Integer.parseInt(intent.getStringExtra(EXTRA_COURSE_ID))).observe(this, new Observer<List<CourseWithExercises>>() {
             @Override
             public void onChanged(List<CourseWithExercises> course) {
                 adapter.setExercises(course.get(0).exercises);
             }
-        });
+        });*/
     }
 
     @Override

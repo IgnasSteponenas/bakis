@@ -22,8 +22,20 @@ public interface CourseExerciseCrossRefDao {
     LiveData<List<CourseExerciseCrossRef>> getAllCourseExerciseCrossRef();
 
     @Transaction
+    @Query("SELECT * FROM CourseExerciseCrossRef WHERE courseId = :courseId AND exerciseId = :exerciseId")
+    CourseExerciseCrossRef getCourseExerciseCrossRefByCourseIdAndExerciseId(Integer courseId, Integer exerciseId);
+
+    @Transaction
     @Query("SELECT * FROM course_table WHERE courseId = :courseId ")
-    LiveData<List<CourseWithExercises>> getAllExercisesOfCourse(int courseId);
+    CourseWithExercises getAllExercisesOfCourse(int courseId);
+
+    @Transaction
+    @Query("DELETE FROM CourseExerciseCrossRef WHERE courseId = :courseId ")
+    void deleteCrossRefByCourseId(Integer courseId);
+
+    @Transaction
+    @Query("DELETE FROM CourseExerciseCrossRef WHERE exerciseId = :exerciseId ")
+    void deleteCrossRefByExerciseId(Integer exerciseId);
 
     @Transaction
     @Query("SELECT * FROM exercise_table WHERE exerciseId = :exerciseId ")

@@ -35,6 +35,8 @@ public class LikedCourses extends Fragment {
         recyclerView.setAdapter(adapter);
 
         courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
+        adapter.setCourseViewModel(courseViewModel);
+
         courseViewModel.getAllLikedCourses().observe(getViewLifecycleOwner(), new Observer<List<Course>>() {
             @Override
             public void onChanged(List<Course> likedCourses) {

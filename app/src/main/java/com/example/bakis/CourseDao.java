@@ -5,6 +5,7 @@ import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import java.util.List;
@@ -13,13 +14,17 @@ import java.util.List;
 public interface CourseDao {
 
     @Insert
-    void insertCourse(Course course);
+    Long insertCourse(Course course);
 
     @Update
     void updateCourse(Course course);
 
     @Delete
     void deleteCourse(Course course);
+
+    @Transaction
+    @Query("SELECT * FROM course_table WHERE rowid = :myRowId")
+    Course getCourseByRowId(Long myRowId);
 
     @Query("SELECT * FROM course_table ORDER BY courseId DESC")
     LiveData<List<Course>> getAllCourses();

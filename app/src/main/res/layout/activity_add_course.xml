@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddCourse"
+    android:background="@color/design_default_color_primary">
+
+    <EditText
+        android:id="@+id/course_add_text_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/title"
+        android:padding="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_add_course_all_exercises"
+        android:layout_width="match_parent"
+        android:layout_height="611dp"
+        tools:listitem="@layout/exercise_item_to_add" />
+
+    <!--<Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="add"
+        android:padding="8dp"
+        android:text="Add" />-->
+
+</LinearLayout>

@@ -70,10 +70,10 @@ public abstract class Database extends RoomDatabase {
             courseDao.insertCourse(new Course("course3", false, false));
             courseDao.insertCourse(new Course("course4", false, true));
 
-            courseExerciseCrossRefDao.insertCourseExerciseCrossRef(new CourseExerciseCrossRef(1, 1, 20));
-            courseExerciseCrossRefDao.insertCourseExerciseCrossRef(new CourseExerciseCrossRef(1, 2, 15));
-            courseExerciseCrossRefDao.insertCourseExerciseCrossRef(new CourseExerciseCrossRef(1, 3, 32));
-            courseExerciseCrossRefDao.insertCourseExerciseCrossRef(new CourseExerciseCrossRef(1, 4, 10));
+            courseExerciseCrossRefDao.insertCourseExerciseCrossRef(new CourseExerciseCrossRef(1, 1, 20, 10));
+            courseExerciseCrossRefDao.insertCourseExerciseCrossRef(new CourseExerciseCrossRef(1, 2, 15, 10));
+            courseExerciseCrossRefDao.insertCourseExerciseCrossRef(new CourseExerciseCrossRef(1, 3, 32, 10));
+            courseExerciseCrossRefDao.insertCourseExerciseCrossRef(new CourseExerciseCrossRef(1, 4, 10, 10));
 
             //LiveData<List<CourseWithExercises>> courseWithExercises = exerciseDao.getAllExercisesOfCourse(1);
 

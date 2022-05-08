@@ -7,11 +7,12 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class CourseExerciseCrossRefViewModel extends AndroidViewModel {
 
     private CourseExerciseCrossRefRepository repository;
-    private LiveData<List<CourseWithExercises>> allExercisesOfCourse;
+    private List<CourseWithExercises> allExercisesOfCourse;
     private LiveData<List<ExerciseWithCourses>> allCoursesOfExercise;
     private LiveData<List<CourseExerciseCrossRef>> allCourseExerciseCrossRef;
     private List<LiveData<List<CourseWithExercises>>> allTest;
@@ -32,7 +33,19 @@ public class CourseExerciseCrossRefViewModel extends AndroidViewModel {
         repository.delete(courseExerciseCrossRef);
     }
 
-    public LiveData<List<CourseWithExercises>> getAllExercisesOfCourse(int courseId){return repository.getAllExercisesOfCourse(courseId);}
+    public void deleteByCourseId(Integer courseId){
+        repository.deleteCrossRefByCourseId(courseId);
+    }
+
+    public void deleteByExerciseId(Integer exerciseId){
+        repository.deleteCrossRefByExerciseId(exerciseId);
+    }
+
+    public CourseExerciseCrossRef getCrossRefByCourseIdAndExerciseId(Integer courseId, Integer exerciseId) throws ExecutionException, InterruptedException {
+        return repository.getCourseExerciseCrossRefByCourseIdAndExerciseId(courseId, exerciseId);
+    }
+
+    public CourseWithExercises getAllExercisesOfCourse(int courseId) throws ExecutionException, InterruptedException {return repository.getAllExercisesOfCourse(courseId);}
 
     public LiveData<List<ExerciseWithCourses>> getAllCoursesOfExercise(int exerciseId){return repository.getAllCoursesOfExercise(exerciseId);}
 

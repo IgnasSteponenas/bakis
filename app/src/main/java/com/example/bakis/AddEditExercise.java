@@ -37,7 +37,7 @@ public class AddEditExercise extends AppCompatActivity {
     private EditText editTextTitle;
     private EditText editTextDescription;
     private GifImageView editGifImageView;
-    private Uri newUri;
+    private Uri newUri = Uri.EMPTY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,7 +137,7 @@ public class AddEditExercise extends AppCompatActivity {
         Intent data = new Intent();
         data.putExtra(EXTRA_TITLE, title);
         data.putExtra(EXTRA_DESCRIPTION, description);
-        if(newUri.toString().isEmpty())
+        if(newUri != null && !newUri.equals(Uri.EMPTY))
             data.putExtra(EXTRA_GIF, getUriToDrawable(this, R.drawable.defaultgif).toString());
         else
             data.putExtra(EXTRA_GIF, newUri.toString());

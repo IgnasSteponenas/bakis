@@ -7,6 +7,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class CourseViewModel extends AndroidViewModel {
 
@@ -24,8 +25,12 @@ public class CourseViewModel extends AndroidViewModel {
 
     }
 
-    public void insert(Course course){
-        repository.insert(course);
+    public Long insert(Course course) throws ExecutionException, InterruptedException {
+        return repository.insert(course);
+    }
+
+    public Course getCourseByRowI(Long rowid) throws ExecutionException, InterruptedException {
+        return repository.getCourseByRowId(rowid);
     }
 
     public void update(Course course){

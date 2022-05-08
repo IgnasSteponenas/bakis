@@ -13,7 +13,7 @@
 
         <TextView
             android:id="@+id/text_view_course_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:paddingLeft="8dp"
@@ -39,6 +39,14 @@
             android:ellipsize="end"
             android:paddingLeft="8dp"
             android:text="@string/number_of_exercises_text" />
+
+        <ImageButton
+            android:id="@+id/image_button_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_star_border" />
 
     </RelativeLayout>
 

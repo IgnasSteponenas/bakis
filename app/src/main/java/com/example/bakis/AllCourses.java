@@ -37,10 +37,12 @@ public class AllCourses extends Fragment {
 
         context = getContext();
 
-        CourseAdapter adapter = new CourseAdapter();
+        CourseAdapter adapter = new CourseAdapter(context);
         recyclerView.setAdapter(adapter);
 
         courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
+        adapter.setCourseViewModel(courseViewModel);
+
         courseViewModel.getAllCourses().observe(getViewLifecycleOwner(), new Observer<List<Course>>() {
             @Override
             public void onChanged(List<Course> courses) {

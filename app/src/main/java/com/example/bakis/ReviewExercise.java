@@ -40,7 +40,7 @@ public class ReviewExercise extends AppCompatActivity {
 
         Intent intent = getIntent();
 
-        setTitle("Review exercise");
+        setTitle(R.string.review_exercise);
 
         reviewTextTitle.setText(intent.getStringExtra(EXTRA_TITLE));
         reviewTextDescription.setText(intent.getStringExtra(EXTRA_DESCRIPTION));

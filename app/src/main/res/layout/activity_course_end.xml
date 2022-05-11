@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_blue_light"
+    tools:context=".CourseEndActivity">
+
+    <TextView
+        android:id="@+id/congratulationsText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="184dp"
+        android:text="Congratulations"
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="40dp" />
+
+    <TextView
+        android:id="@+id/congratulationsText2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/congratulationsText"
+        android:text="You've completed course"
+        android:textAlignment="center"
+        android:layout_marginBottom="80dp"
+        android:textColor="@android:color/white"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/exercisesText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/congratulationsText2"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="80dp"
+        android:textColor="@android:color/white"
+        android:text="Exercises complete"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/congratulationsText2"
+        android:layout_toEndOf="@+id/exercisesText"
+        android:layout_marginStart="50dp"
+        android:layout_alignParentEnd="true"
+        android:textColor="@android:color/white"
+        android:text="Time needed"/>
+
+    <TextView
+        android:id="@+id/exercisesNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/exercisesText"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="110dp"
+        android:text="20/20"
+        android:textColor="@android:color/white"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/timeNeeded"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/exercisesText"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="60dp"
+        android:layout_toEndOf="@+id/exercisesText"
+        android:text="00:00"
+        android:textColor="@android:color/white"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/getBackToMainActivity"
+        android:layout_width="174dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/exercisesNumber"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="180dp"
+        android:background="@android:color/white"
+        android:text="OK" />
+
+
+</RelativeLayout>

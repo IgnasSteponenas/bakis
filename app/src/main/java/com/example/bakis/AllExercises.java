@@ -22,6 +22,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+import java.util.Locale;
 
 public class AllExercises extends Fragment {
 
@@ -34,6 +35,8 @@ public class AllExercises extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_allexercises, container, false);
+
+        getActivity().setTitle(R.string.all_exercises);
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_all);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -56,8 +59,14 @@ public class AllExercises extends Fragment {
             @Override
             public void onItemClick(Exercise exercise) {
                 Intent intent = new Intent(context, ReviewExercise.class);
-                intent.putExtra(ReviewExercise.EXTRA_TITLE, exercise.getTitle());
-                intent.putExtra(ReviewExercise.EXTRA_DESCRIPTION, exercise.getDescription());
+
+                if(Locale.getDefault().getLanguage().equals("lt") && exercise.getTitleInLithuanian() != null) {
+                    intent.putExtra(ReviewExercise.EXTRA_TITLE, exercise.getTitleInLithuanian());
+                    intent.putExtra(ReviewExercise.EXTRA_DESCRIPTION, exercise.getDescriptionInLithuanian());
+                }else {
+                    intent.putExtra(ReviewExercise.EXTRA_TITLE, exercise.getTitleInEnglish());
+                    intent.putExtra(ReviewExercise.EXTRA_DESCRIPTION, exercise.getDescriptionInEnglish());
+                }
                 intent.putExtra(ReviewExercise.EXTRA_GIF, exercise.getGif());
                 startActivity(intent);
             }

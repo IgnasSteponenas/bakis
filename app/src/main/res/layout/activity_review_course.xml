@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@android:color/holo_blue_light"
     tools:context=".ReviewCourse">
 
 
@@ -16,10 +17,24 @@
         android:padding="8dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
+    <Button
+        android:id="@+id/button_edit_course"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/edit_course"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_course_exercises"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:listitem="@layout/exercise_item"/>
+        android:layout_height="536dp"
+        tools:listitem="@layout/exercise_item" />
+
+    <Button
+        android:id="@+id/button_start_course"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/start_course"/>
 
 </LinearLayout>

@@ -27,6 +27,10 @@ public interface CourseExerciseCrossRefDao {
 
     @Transaction
     @Query("SELECT * FROM course_table WHERE courseId = :courseId ")
+    LiveData<CourseWithExercises> getAllExercisesOfCourseLiveData(int courseId);
+
+    @Transaction
+    @Query("SELECT * FROM course_table WHERE courseId = :courseId ")
     CourseWithExercises getAllExercisesOfCourse(int courseId);
 
     @Transaction

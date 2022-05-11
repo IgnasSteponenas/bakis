@@ -10,15 +10,19 @@ public class Exercise {
 
     @PrimaryKey(autoGenerate = true)
     private int exerciseId;
-    private String title;
-    private String description;
+    private String titleInEnglish;
+    private String descriptionInEnglish;
+    private String titleInLithuanian;
+    private String descriptionInLithuanian;
     private int gif;
     private String uri;
     private boolean createdByUser;
 
-    public Exercise(String title, String description, int gif, String uri, boolean createdByUser) {
-        this.title = title;
-        this.description = description;
+    public Exercise(String titleInEnglish, String descriptionInEnglish, String titleInLithuanian, String descriptionInLithuanian, int gif, String uri, boolean createdByUser) {
+        this.titleInEnglish = titleInEnglish;
+        this.descriptionInEnglish = descriptionInEnglish;
+        this.titleInLithuanian = titleInLithuanian;
+        this.descriptionInLithuanian = descriptionInLithuanian;
         this.gif = gif;
         this.uri = uri;
         this.createdByUser = createdByUser;
@@ -32,12 +36,48 @@ public class Exercise {
         return exerciseId;
     }
 
-    public String getTitle() {
-        return title;
+    public String getTitleInEnglish() {
+        return titleInEnglish;
     }
 
-    public String getDescription() {
-        return description;
+    public void setTitleInEnglish(String titleInEnglish) {
+        this.titleInEnglish = titleInEnglish;
+    }
+
+    public String getDescriptionInEnglish() {
+        return descriptionInEnglish;
+    }
+
+    public void setDescriptionInEnglish(String descriptionInEnglish) {
+        this.descriptionInEnglish = descriptionInEnglish;
+    }
+
+    public String getTitleInLithuanian() {
+        return titleInLithuanian;
+    }
+
+    public void setTitleInLithuanian(String titleInLithuanian) {
+        this.titleInLithuanian = titleInLithuanian;
+    }
+
+    public String getDescriptionInLithuanian() {
+        return descriptionInLithuanian;
+    }
+
+    public void setDescriptionInLithuanian(String descriptionInLithuanian) {
+        this.descriptionInLithuanian = descriptionInLithuanian;
+    }
+
+    public void setGif(int gif) {
+        this.gif = gif;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
+    }
+
+    public void setCreatedByUser(boolean createdByUser) {
+        this.createdByUser = createdByUser;
     }
 
     public int getGif() {

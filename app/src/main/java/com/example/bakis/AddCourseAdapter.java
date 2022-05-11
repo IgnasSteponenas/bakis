@@ -1,6 +1,8 @@
 package com.example.bakis;
 
 import android.content.Context;
+import android.text.InputType;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import pl.droidsonroids.gif.GifImageView;
 
@@ -42,12 +45,18 @@ public class AddCourseAdapter extends RecyclerView.Adapter<AddCourseAdapter.AddC
     @Override
     public void onBindViewHolder(@NonNull AddCourseHolder holder, int position) {
         Exercise currentExercise = exercises.get(position);
-        holder.textViewTitle.setText(currentExercise.getTitle());
+
+        if(Locale.getDefault().getLanguage().equals("lt") && currentExercise.getTitleInLithuanian() != null) {
+            holder.textViewTitle.setText(currentExercise.getTitleInLithuanian());
+            holder.textViewDescription.setText(currentExercise.getDescriptionInLithuanian());
+        }else {
+            holder.textViewTitle.setText(currentExercise.getTitleInEnglish());
+            holder.textViewDescription.setText(currentExercise.getDescriptionInEnglish());
+        }
         holder.textViewTitle.setTag(holder);
-        holder.textViewDescription.setText(currentExercise.getDescription());
         holder.textViewDescription.setTag(holder);
-        holder.repeats.setTag(position);
-        holder.timePerRepeat.setTag(holder);
+        //holder.repeats.setTag(holder);
+        //holder.timePerRepeat.setTag(holder);
 
         if(currentExercise.getGif()==0) {//default gif
             holder.gifImageView.setImageResource(R.drawable.defaultgif);
@@ -87,7 +96,7 @@ public class AddCourseAdapter extends RecyclerView.Adapter<AddCourseAdapter.AddC
                     selectedTimePerRepeat.add(Integer.parseInt(holder.timePerRepeat.getText().toString()));
                     highlightView(holder);
                 }else{
-                    Toast.makeText(context, "Choose repeat count or time per repeat  ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, R.string.choose_repeat_time_per_repeat, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -122,7 +131,7 @@ public class AddCourseAdapter extends RecyclerView.Adapter<AddCourseAdapter.AddC
     }
 
     private void unhighlightView(AddCourseHolder holder) {
-        holder.itemView.findViewById(R.id.card).setBackgroundColor(ContextCompat.getColor(context, R.color.design_default_color_secondary));//hardcore color values
+        holder.itemView.findViewById(R.id.card).setBackgroundColor(ContextCompat.getColor(context, R.color.white));//hardcore color values
     }
 
     public void setExercises(List<Exercise> exercises) {

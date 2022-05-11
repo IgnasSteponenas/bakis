@@ -2,16 +2,15 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="8dp"
     android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp">
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp">
 
     <RelativeLayout
         android:id="@+id/card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:background="@color/design_default_color_secondary">
+        android:padding="8dp">
 
         <pl.droidsonroids.gif.GifImageView
             android:id="@+id/gif_image_view"
@@ -24,24 +23,35 @@
             android:id="@+id/text_view_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+
             android:layout_toEndOf="@id/gif_image_view"
             android:ellipsize="end"
             android:maxLines="1"
-            android:paddingLeft="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="16dp"
             android:text="@string/title"
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
+        <!--<View
+            android:layout_width="wrap_content"
+            android:background="@color/black"
+            android:layout_alignStart="@+id/text_view_title"
+            android:layout_alignEnd="@+id/text_view_title"
+            android:layout_height="1dp"
+            android:layout_toEndOf="@id/gif_image_view"
+            android:layout_below="@+id/text_view_title" />-->
 
         <TextView
             android:id="@+id/text_view_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/text_view_title"
+            android:layout_alignParentEnd="true"
             android:layout_toEndOf="@id/gif_image_view"
             android:ellipsize="end"
             android:maxLines="2"
-            android:paddingLeft="8dp"
+            android:paddingStart="8dp"
+            android:paddingEnd="16dp"
             android:text="@string/description" />
 
         <TextView
@@ -54,7 +64,22 @@
             android:maxLines="1"
             android:paddingLeft="8dp"
             android:paddingTop="16dp"
-            android:text="@string/repeats" />
+            android:text="@string/repeats"
+            android:textColor="@color/black" />
+
+        <!--<View
+            android:layout_width="wrap_content"
+            android:background="@color/black"
+            android:layout_height="1dp"
+            android:layout_toEndOf="@id/repeats"
+            android:layout_below="@+id/repeats" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:background="@color/black"
+            android:layout_height="1dp"
+            android:layout_toEndOf="@id/time_per_repeat"
+            android:layout_below="@+id/time_per_repeat" />-->
 
         <TextView
             android:id="@+id/time_per_repeat"
@@ -66,8 +91,8 @@
             android:maxLines="1"
             android:paddingLeft="8dp"
             android:paddingTop="16dp"
-            android:text="@string/time_per_repeat" />
-
+            android:text="@string/time_per_repeat"
+            android:textColor="@color/black" />
 
         <EditText
             android:id="@+id/repeats_number"

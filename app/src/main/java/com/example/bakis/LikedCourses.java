@@ -18,6 +18,7 @@ import java.util.List;
 public class LikedCourses extends Fragment {
 
     private CourseViewModel courseViewModel;
+    private CourseExerciseCrossRefViewModel courseExerciseCrossRefViewModel;
     private Context context;
 
     @Nullable
@@ -25,22 +26,26 @@ public class LikedCourses extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_likedcourses, container, false);
 
+        getActivity().setTitle(R.string.my_liked_courses);
+
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_all_liked_courses);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
         recyclerView.setHasFixedSize(true);
 
         context = getContext();
 
-        LikedCoursesAdapter adapter = new LikedCoursesAdapter();
+        CourseAdapter adapter = new CourseAdapter(context);
         recyclerView.setAdapter(adapter);
 
         courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
+        courseExerciseCrossRefViewModel = new ViewModelProvider(this).get(CourseExerciseCrossRefViewModel.class);
         adapter.setCourseViewModel(courseViewModel);
+        adapter.setCourseExerciseCrossRefViewModel(courseExerciseCrossRefViewModel);
 
         courseViewModel.getAllLikedCourses().observe(getViewLifecycleOwner(), new Observer<List<Course>>() {
             @Override
             public void onChanged(List<Course> likedCourses) {
-                adapter.setLikedCourses(likedCourses);
+                adapter.setCourses(likedCourses);
 
             }
         });

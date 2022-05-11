@@ -31,7 +31,7 @@
             android:title="@string/my_created_exercises" />
     </group>
 
-    <item android:title="Other">
+    <!--<item android:title="Other">
         <menu>
             <item
                 android:id="@+id/changeLanguage"
@@ -46,7 +46,7 @@
                 android:icon="@drawable/ic_login"
                 android:title="@string/login" />
         </menu>
-    </item>
+    </item>-->
 
 
 

@@ -9,13 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.List;
-
-import pl.droidsonroids.gif.GifImageView;
+import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 public class ReviewCourse extends AppCompatActivity {
 
@@ -26,8 +26,12 @@ public class ReviewCourse extends AppCompatActivity {
             "com.example.bakis.EXTRA_COURSE_ID";
 
     private TextView courseReviewTextTitle;
+    private Button editCourseButton;
+    private Button startCourseButton;
 
     private CourseExerciseCrossRefViewModel courseExerciseCrossRefViewModel;
+    private CourseViewModel courseViewModel;
+    private Course course = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,13 +39,27 @@ public class ReviewCourse extends AppCompatActivity {
         setContentView(R.layout.activity_review_course);
 
         courseReviewTextTitle = findViewById(R.id.course_review_text_title);
+        editCourseButton = findViewById(R.id.button_edit_course);
+        startCourseButton = findViewById(R.id.button_start_course);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_close);
 
-        Intent intent = getIntent();
+        courseExerciseCrossRefViewModel = new ViewModelProvider(this).get(CourseExerciseCrossRefViewModel.class);
 
-        setTitle("Review course");
+        Intent intent = getIntent();
+        int id = Integer.parseInt(intent.getStringExtra(EXTRA_COURSE_ID).toString());
+
+        try {
+            course = courseExerciseCrossRefViewModel.getAllExercisesOfCourse(id).course;
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        setTitle(R.string.review_course);
 
         courseReviewTextTitle.setText(intent.getStringExtra(EXTRA_COURSE_TITLE));
 
@@ -55,13 +73,77 @@ public class ReviewCourse extends AppCompatActivity {
         ExerciseAdapter adapter = new ExerciseAdapter();
         recyclerView.setAdapter(adapter);
 
-        /*courseExerciseCrossRefViewModel = new ViewModelProvider(this).get(CourseExerciseCrossRefViewModel.class);
-        courseExerciseCrossRefViewModel.getAllExercisesOfCourse(Integer.parseInt(intent.getStringExtra(EXTRA_COURSE_ID))).observe(this, new Observer<List<CourseWithExercises>>() {
+
+
+        /*CourseWithExercises courseWithExercises = null;
+
+        try {
+            courseWithExercises = courseExerciseCrossRefViewModel.getAllExercisesOfCourse(Integer.parseInt(intent.getStringExtra(EXTRA_COURSE_ID))).getValue();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }*/
+
+        try {
+            courseExerciseCrossRefViewModel.getAllExercisesOfCourseLiveData(Integer.parseInt(intent.getStringExtra(EXTRA_COURSE_ID))).observe(this, new Observer<CourseWithExercises>() {
+                @Override
+                public void onChanged(CourseWithExercises course) {
+                    adapter.setExercises(course.exercises);
+                }
+            });
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        /*adapter.setOnItemClickListener(new ExerciseAdapter.OnItemClickListener() {
             @Override
-            public void onChanged(List<CourseWithExercises> course) {
-                adapter.setExercises(course.get(0).exercises);
+            public void onItemClick(Exercise exercise) {
+                Intent intent = new Intent(ReviewCourse.this, ReviewExercise.class);
+
+                if(Locale.getDefault().getLanguage().equals("lt") && exercise.getTitleInLithuanian() != null) {
+                    intent.putExtra(ReviewExercise.EXTRA_TITLE, exercise.getTitleInLithuanian());
+                    intent.putExtra(ReviewExercise.EXTRA_DESCRIPTION, exercise.getDescriptionInLithuanian());
+                }else {
+                    intent.putExtra(ReviewExercise.EXTRA_TITLE, exercise.getTitleInEnglish());
+                    intent.putExtra(ReviewExercise.EXTRA_DESCRIPTION, exercise.getDescriptionInEnglish());
+                }
+                intent.putExtra(ReviewExercise.EXTRA_GIF, exercise.getGif());
+                startActivity(intent);
             }
         });*/
+
+        editCourseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ReviewCourse.this, AddCourse.class);
+                intent.putExtra(AddCourse.EXTRA_COURSE_ID, course.getCourseId());
+                if(Locale.getDefault().getLanguage().equals("lt") && course.getTitleInLithuanian()!=null)
+                    intent.putExtra(AddCourse.EXTRA_COURSE_TITLE, course.getTitleInLithuanian());
+                else
+                    intent.putExtra(AddCourse.EXTRA_COURSE_TITLE, course.getTitleInEnglish());
+                intent.putExtra(AddCourse.EXTRA_CREATED_BY_USER, course.isCreatedByUser());
+                intent.putExtra(AddCourse.EXTRA_LIKED, course.isLiked());
+                startActivity(intent);
+            }
+        });
+
+        startCourseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ReviewCourse.this, StartCourseActivity.class);
+                intent.putExtra(StartCourseActivity.EXTRA_COURSE_ID, course.getCourseId());
+                /*if(Locale.getDefault().getLanguage().equals("lt") && course.getTitleInLithuanian()!=null)
+                    intent.putExtra(StartCourseActivity.EXTRA_COURSE_TITLE, course.getTitleInLithuanian());
+                else
+                    intent.putExtra(StartCourseActivity.EXTRA_COURSE_TITLE, course.getTitleInEnglish());
+                intent.putExtra(StartCourseActivity.EXTRA_CREATED_BY_USER, course.isCreatedByUser());
+                intent.putExtra(StartCourseActivity.EXTRA_LIKED, course.isLiked());*/
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

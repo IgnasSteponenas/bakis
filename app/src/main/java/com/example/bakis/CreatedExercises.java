@@ -41,6 +41,8 @@ public class CreatedExercises extends Fragment {
         View view = inflater.inflate(R.layout.fragment_created_exercises, container, false);
         context = getContext();
 
+        getActivity().setTitle(R.string.my_created_exercises);
+
         FloatingActionButton buttonAddExercise = view.findViewById(R.id.button_add_exercise);
         buttonAddExercise.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +83,7 @@ public class CreatedExercises extends Fragment {
                 courseExerciseCrossRefViewModel.deleteByExerciseId(exercise.getExerciseId());
 
                 exerciseViewModel.delete(adapter.getExerciseAt(viewHolder.getAdapterPosition()));
-                Toast.makeText(context, "Exercise deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.exercise_deleted, Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
 
@@ -90,8 +92,8 @@ public class CreatedExercises extends Fragment {
             public void onItemClick(Exercise exercise) {
                 Intent intent = new Intent(context, AddEditExercise.class);
                 intent.putExtra(AddEditExercise.EXTRA_ID, exercise.getExerciseId());
-                intent.putExtra(AddEditExercise.EXTRA_TITLE, exercise.getTitle());
-                intent.putExtra(AddEditExercise.EXTRA_DESCRIPTION, exercise.getDescription());
+                intent.putExtra(AddEditExercise.EXTRA_TITLE, exercise.getTitleInEnglish());
+                intent.putExtra(AddEditExercise.EXTRA_DESCRIPTION, exercise.getDescriptionInEnglish());
                 intent.putExtra(AddEditExercise.EXTRA_GIF, exercise.getUri());
                 startActivityForResult(intent, EDIT_EXERCISE_REQUEST);
             }
@@ -108,15 +110,15 @@ public class CreatedExercises extends Fragment {
             String description = data.getStringExtra(AddEditExercise.EXTRA_DESCRIPTION);
             String uri = data.getStringExtra(AddEditExercise.EXTRA_GIF);
 
-            Exercise exercise = new Exercise(title, description, 0, uri, true);
+            Exercise exercise = new Exercise(title, description, null, null, 0, uri, true);
             exerciseViewModel.insert(exercise);
 
-            Toast.makeText(getContext(), "Exercise saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.exercise_saved, Toast.LENGTH_SHORT).show();
         } else if (requestCode == EDIT_EXERCISE_REQUEST && resultCode == RESULT_OK) {
             int id = data.getIntExtra(AddEditExercise.EXTRA_ID, -1);
 
             if (id == -1) {
-                Toast.makeText(context, "Exercise can't be updated", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.exercise_not_updated, Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -124,14 +126,14 @@ public class CreatedExercises extends Fragment {
             String description = data.getStringExtra(AddEditExercise.EXTRA_DESCRIPTION);
             String uri = data.getStringExtra(AddEditExercise.EXTRA_GIF);
 
-            Exercise exercise = new Exercise(title, description, 0, uri, true);
+            Exercise exercise = new Exercise(title, description, null, null, 0, uri, true);
             exercise.setExerciseId(id);
             exerciseViewModel.update(exercise);
 
-            Toast.makeText(context, "Exercise updated", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, R.string.exercise_updated, Toast.LENGTH_SHORT).show();
 
         } else {
-            Toast.makeText(getContext(), "Exercise not saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), R.string.exercise_not_saved, Toast.LENGTH_SHORT).show();
         }
     }
 }

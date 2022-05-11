@@ -12,14 +12,14 @@ public class Course {
     @PrimaryKey(autoGenerate = true)
     private int courseId;
 
-    private String title;
+    private String titleInEnglish;
+    private String titleInLithuanian;
     private boolean createdByUser;
     private boolean liked;
-    //private List<Exercise> courseExercises;
-    //private int[] repeats;
 
-    public Course(String title, boolean createdByUser, boolean liked) {
-        this.title = title;
+    public Course(String titleInEnglish, String titleInLithuanian, boolean createdByUser, boolean liked) {
+        this.titleInEnglish = titleInEnglish;
+        this.titleInLithuanian = titleInLithuanian;
         this.createdByUser = createdByUser;
         this.liked = liked;
     }
@@ -40,16 +40,24 @@ public class Course {
         return courseId;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
     public boolean isCreatedByUser() {
         return createdByUser;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getTitleInEnglish() {
+        return titleInEnglish;
+    }
+
+    public void setTitleInEnglish(String titleInEnglish) {
+        this.titleInEnglish = titleInEnglish;
+    }
+
+    public String getTitleInLithuanian() {
+        return titleInLithuanian;
+    }
+
+    public void setTitleInLithuanian(String titleInLithuanian) {
+        this.titleInLithuanian = titleInLithuanian;
     }
 
     public void setCreatedByUser(boolean createdByUser) {

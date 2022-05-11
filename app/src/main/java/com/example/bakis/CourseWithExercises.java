@@ -1,6 +1,7 @@
 package com.example.bakis;
 
 import androidx.annotation.Nullable;
+import androidx.lifecycle.LiveData;
 import androidx.room.Embedded;
 import androidx.room.Junction;
 import androidx.room.Relation;

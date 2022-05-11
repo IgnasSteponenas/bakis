@@ -1,3 +1,4 @@
+/*
 package com.example.bakis;
 
 import android.view.LayoutInflater;
@@ -80,7 +81,8 @@ public class LikedCoursesAdapter extends RecyclerView.Adapter<LikedCoursesAdapte
             textViewTitle = itemView.findViewById(R.id.text_view_course_title);
             exerciseNumber = itemView.findViewById(R.id.text_view_exercise_number);
             starButton = itemView.findViewById(R.id.image_button_star);
-            /*itemView.setOnClickListener(new View.OnClickListener() {
+            */
+/*itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     int position = getAdapterPosition();
@@ -88,8 +90,10 @@ public class LikedCoursesAdapter extends RecyclerView.Adapter<LikedCoursesAdapte
                         listener.onItemClick(exercises.get(position));
                     }
                 }
-            });*/
+            });*//*
+
         }
     }
 
 }
+*/

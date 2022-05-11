@@ -22,6 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class CreatedCourses extends Fragment {
 
@@ -37,6 +38,8 @@ public class CreatedCourses extends Fragment {
         //button_add_course
 
         View view = inflater.inflate(R.layout.fragment_createdcourses, container, false);
+
+        getActivity().setTitle(R.string.my_created_courses);
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_created_courses);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -60,6 +63,7 @@ public class CreatedCourses extends Fragment {
 
         courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
         adapter.setCourseViewModel(courseViewModel);
+        adapter.setCourseExerciseCrossRefViewModel(courseExerciseCrossRefViewModel);
 
         courseViewModel.getUserCreatedCourses().observe(getViewLifecycleOwner(), new Observer<List<Course>>() {
             @Override
@@ -82,7 +86,7 @@ public class CreatedCourses extends Fragment {
                 courseExerciseCrossRefViewModel.deleteByCourseId(course.getCourseId());
                 courseViewModel.delete(course);
 
-                Toast.makeText(context, "Course deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, R.string.course_deleted, Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
 
@@ -91,7 +95,10 @@ public class CreatedCourses extends Fragment {
             public void onItemClick(Course course) {
                 Intent intent = new Intent(context, AddCourse.class);
                 intent.putExtra(AddCourse.EXTRA_COURSE_ID, course.getCourseId());
-                intent.putExtra(AddCourse.EXTRA_COURSE_TITLE, course.getTitle());
+                if(Locale.getDefault().getLanguage().equals("lt") && course.getTitleInLithuanian()!=null)
+                    intent.putExtra(AddCourse.EXTRA_COURSE_TITLE, course.getTitleInLithuanian());
+                else
+                    intent.putExtra(AddCourse.EXTRA_COURSE_TITLE, course.getTitleInEnglish());
                 intent.putExtra(AddCourse.EXTRA_CREATED_BY_USER, course.isCreatedByUser());
                 intent.putExtra(AddCourse.EXTRA_LIKED, course.isLiked());
                 startActivity(intent);

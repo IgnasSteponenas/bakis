@@ -17,12 +17,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
-        android:text="ten kazkoks tekstas"
+        android:text="@string/app_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="224dp"
         android:layout_height="wrap_content"
-        android:text="cia dar kazkas parasyta"/>
+        android:text="@string/app_description"
+        android:textSize="12dp"/>
 
 </LinearLayout>

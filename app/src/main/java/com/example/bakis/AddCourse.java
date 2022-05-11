@@ -8,8 +8,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
+import android.text.InputType;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -67,10 +68,14 @@ public class AddCourse extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         if(intent.hasExtra(EXTRA_COURSE_ID)){
-            setTitle("Edit course");
+            setTitle(R.string.edit_course);
             editCourse = true;
 
             courseTitle.setText(intent.getStringExtra(EXTRA_COURSE_TITLE));
+
+            if(!intent.getBooleanExtra(EXTRA_CREATED_BY_USER, false))
+                disableInput(courseTitle);
+
             Integer courseId = intent.getIntExtra(EXTRA_COURSE_ID, -1);
 
             List<Exercise> courseSelectedExercises = new ArrayList<>();
@@ -99,9 +104,9 @@ public class AddCourse extends AppCompatActivity {
             adapter.setSelectedRepeats(selectedRepeats);
             adapter.setSelectedTimePerRepeat(selectedTimePerRepeat);
         }else{
-            setTitle("Add course");
+            setTitle(R.string.add_course);
             editCourse = false;
-
+            courseTitle.setEnabled(true);
         }
 
 
@@ -119,6 +124,18 @@ public class AddCourse extends AppCompatActivity {
         });
     }
 
+    private void disableInput(EditText editText){
+        editText.setInputType(InputType.TYPE_NULL);
+        editText.setTextIsSelectable(false);
+        editText.setBackground(null);
+        editText.setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                return true;  // Blocks input from hardware keyboards.
+            }
+        });
+    }
+
     public void add() throws ExecutionException, InterruptedException {
         List<Exercise> selected = new ArrayList<>();
         List<Integer> selectedRepeats = new ArrayList<>();
@@ -131,7 +148,7 @@ public class AddCourse extends AppCompatActivity {
         selectedTimePerRepeat = adapter.getSelectedTimePerRepeat();
 
         if(!title.isEmpty() && !selected.isEmpty() && !selectedRepeats.isEmpty() && !selectedTimePerRepeat.isEmpty() && !editCourse) {
-            Course course = new Course(title, true, false);
+            Course course = new Course(title, null, true, false);
             Long rowid = courseViewModel.insert(course);
             course = null;
             if(rowid != null) {
@@ -147,14 +164,14 @@ public class AddCourse extends AppCompatActivity {
                                 selectedTimePerRepeat.get(i)));
                     }
 
-                    Toast.makeText(this, "Course added", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.course_added, Toast.LENGTH_SHORT).show();
                 }else
-                    Toast.makeText(this, "Course not saved", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, R.string.course_not_saved, Toast.LENGTH_SHORT).show();
             }else
-                Toast.makeText(this, "Course not saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, R.string.course_not_saved, Toast.LENGTH_SHORT).show();
         }else if(!title.isEmpty() && !selected.isEmpty() && !selectedRepeats.isEmpty() && !selectedTimePerRepeat.isEmpty() && editCourse){
             //EXTRA_COURSE_ID intent.getStringExtra(EXTRA_COURSE_TITLE)
-            Course course = new Course(title, true, intent.getBooleanExtra(EXTRA_LIKED, false));
+            Course course = new Course(title, null, true, intent.getBooleanExtra(EXTRA_LIKED, false));
             int courseId = intent.getIntExtra(EXTRA_COURSE_ID, -1);
 
             if(courseId!=-1) {
@@ -171,7 +188,7 @@ public class AddCourse extends AppCompatActivity {
                 }
             }
         }else{
-            Toast.makeText(this, "Course not saved", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.course_not_saved, Toast.LENGTH_SHORT).show();
         }
 
         finish();

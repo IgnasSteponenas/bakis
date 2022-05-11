@@ -8,22 +8,19 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import pl.droidsonroids.gif.GifImageView;
+import java.util.Locale;
+import java.util.concurrent.ExecutionException;
 
 public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHolder> {
     private List<Course> courses = new ArrayList<>();
     private List<CourseWithExercises> courseWithExercises = new ArrayList<>();
     //private CourseExerciseCrossRefViewModel courseExerciseCrossRefViewModel;
     private CourseViewModel courseViewModel;
+    private CourseExerciseCrossRefViewModel courseExerciseCrossRefViewModel;
 
     private CourseAdapter.OnItemClickListener listener;
     private Context context;
@@ -42,9 +39,21 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
         Course currentCourse = courses.get(position);
         //CourseWithExercises currentCourseWithExercises = courseExerciseCrossRefViewModel.getAllExercisesOfCourse(position).getValue().get(0);
         //CourseWithExercises currentCourseWithExercises = courseWithExercises.get(position);
-        holder.textViewTitle.setText(currentCourse.getTitle());
+        if(Locale.getDefault().getLanguage().equals("lt") && currentCourse.getTitleInLithuanian()!=null)
+            holder.textViewTitle.setText(currentCourse.getTitleInLithuanian());
+        else
+            holder.textViewTitle.setText(currentCourse.getTitleInEnglish());
 
-        //holder.exerciseNumber.setText(currentCourseWithExercises.exercises.size());
+        int exerciseCount = 0;
+        try {
+            exerciseCount = courseExerciseCrossRefViewModel.getAllExercisesOfCourse(currentCourse.getCourseId()).exercises.size();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        holder.exerciseNumber.setText(String.valueOf(exerciseCount));
 
         //holder.starButton.setImageResource(R.drawable.ic_full_star);
         //holder.itemView.setOnClickListener(new View.OnClickListener()
@@ -96,6 +105,10 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.CourseHold
 
     public Course getCourseAt(int position) {
         return courses.get(position);
+    }
+
+    public void setCourseExerciseCrossRefViewModel(CourseExerciseCrossRefViewModel courseExerciseCrossRefViewModel) {
+        this.courseExerciseCrossRefViewModel = courseExerciseCrossRefViewModel;
     }
 
     class CourseHolder extends RecyclerView.ViewHolder {

@@ -45,7 +45,10 @@ public class CourseExerciseCrossRefViewModel extends AndroidViewModel {
         return repository.getCourseExerciseCrossRefByCourseIdAndExerciseId(courseId, exerciseId);
     }
 
+    public LiveData<CourseWithExercises> getAllExercisesOfCourseLiveData(int courseId) throws ExecutionException, InterruptedException {return repository.getAllExercisesOfCourseLiveData(courseId);}
+
     public CourseWithExercises getAllExercisesOfCourse(int courseId) throws ExecutionException, InterruptedException {return repository.getAllExercisesOfCourse(courseId);}
+
 
     public LiveData<List<ExerciseWithCourses>> getAllCoursesOfExercise(int exerciseId){return repository.getAllCoursesOfExercise(exerciseId);}
 

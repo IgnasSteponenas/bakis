@@ -13,6 +13,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Bakis">
         <activity
+            android:name=".CourseEndActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StartCourseActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
+        <activity
             android:name=".AddCourse"
             android:exported="false"
             android:parentActivityName=".MainActivity" />

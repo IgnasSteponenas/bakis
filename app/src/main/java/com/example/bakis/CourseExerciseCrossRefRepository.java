@@ -48,8 +48,12 @@ public class CourseExerciseCrossRefRepository {
         return new CourseExerciseCrossRefRepository.GetCourseExerciseCrossRefByCourseIdAndExerciseId(courseExerciseCrossRefDao).execute(courseId, exerciseId).get();
     }
 
+    public LiveData<CourseWithExercises> getAllExercisesOfCourseLiveData(int courseId) throws ExecutionException, InterruptedException {
+        return new GetAllExercisesOfCourseLiveDataAsyncTask(courseExerciseCrossRefDao).execute(courseId).get();
+    }
+
     public CourseWithExercises getAllExercisesOfCourse(int courseId) throws ExecutionException, InterruptedException {
-        return new CourseExerciseCrossRefRepository.GetAllExercisesOfCourseAsyncTask(courseExerciseCrossRefDao).execute(courseId).get();
+        return new GetAllExercisesOfCourseAsyncTask(courseExerciseCrossRefDao).execute(courseId).get();
     }
 
     public LiveData<List<ExerciseWithCourses>> getAllCoursesOfExercise(int exerciseId){return allCoursesOfExercise;}
@@ -112,6 +116,19 @@ public class CourseExerciseCrossRefRepository {
             return null;
         }
 
+    }
+
+    private static class GetAllExercisesOfCourseLiveDataAsyncTask extends AsyncTask<Integer, Void, LiveData<CourseWithExercises>>{
+        private CourseExerciseCrossRefDao courseExerciseCrossRefDao;
+
+        private GetAllExercisesOfCourseLiveDataAsyncTask(CourseExerciseCrossRefDao courseExerciseCrossRefDao){
+            this.courseExerciseCrossRefDao = courseExerciseCrossRefDao;
+        }
+
+        @Override
+        protected LiveData<CourseWithExercises> doInBackground(Integer... integers) {
+            return courseExerciseCrossRefDao.getAllExercisesOfCourseLiveData(integers[0]);
+        }
     }
 
     private static class GetAllExercisesOfCourseAsyncTask extends AsyncTask<Integer, Void, CourseWithExercises>{

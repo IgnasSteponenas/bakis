@@ -64,15 +64,16 @@ public class AddEditExercise extends AppCompatActivity {
         Intent intent = getIntent();
 
         if (intent.hasExtra(EXTRA_ID)) {
-            setTitle("Edit exercise");
+            setTitle(R.string.edit_exercise);
             editTextTitle.setText(intent.getStringExtra(EXTRA_TITLE));
             editTextDescription.setText(intent.getStringExtra(EXTRA_DESCRIPTION));
             //TODO no permission to take image need to fix
-            editGifImageView.setImageURI(Uri.parse(intent.getStringExtra(EXTRA_GIF)));
+            //editGifImageView.setImageURI(Uri.parse(intent.getStringExtra(EXTRA_GIF)));
+            editGifImageView.setImageResource(R.drawable.defaultgif);//temp
             newUri = Uri.parse(intent.getStringExtra(EXTRA_GIF));
             //tempResource = intent.getIntExtra(EXTRA_GIF, R.drawable.defaultgif);
         } else {
-            setTitle("Add exercise");
+            setTitle(R.string.add_exercise);
             editGifImageView.setImageResource(R.drawable.defaultgif);
         }
     }
@@ -130,7 +131,7 @@ public class AddEditExercise extends AppCompatActivity {
         String description = editTextDescription.getText().toString();
 
         if (title.trim().isEmpty() || description.trim().isEmpty()) {
-            Toast.makeText(this, "Please insert a title and description", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.insert_title_description, Toast.LENGTH_SHORT).show();
             return;
         }
 

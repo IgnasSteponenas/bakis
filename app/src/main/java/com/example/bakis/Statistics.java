@@ -13,6 +13,7 @@ public class Statistics extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        getActivity().setTitle(R.string.statistics);
         return inflater.inflate(R.layout.fragment_statistics, container, false);
     }
 }

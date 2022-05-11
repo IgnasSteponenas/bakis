@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">bakis</string>
+    <string name="app_name">Rehabilitation app</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -23,5 +23,27 @@
     <string name="number_of_exercises_text">Exercises</string>
     <string name="repeats">Repeats</string>
     <string name="time_per_repeat">Time per repeat (sec.)</string>
+    <string name="review_course">Review course</string>
+    <string name="add_exercise">Add exercise</string>
+    <string name="edit_exercise">Edit exercise</string>
+    <string name="edit_course">Edit course</string>
+    <string name="add_course">Add course</string>
+    <string name="course_added">Course added</string>
+    <string name="course_not_saved">Course not saved</string>
+    <string name="choose_repeat_time_per_repeat">Choose repeat count or time per repeat</string>
+    <string name="insert_title_description">Please insert a title and description</string>
+    <string name="course_deleted">Course deleted</string>
+    <string name="exercise_deleted">Exercise deleted</string>
+    <string name="exercise_saved">Exercise saved</string>
+    <string name="exercise_not_updated">Exercise can\'t be updated</string>
+    <string name="exercise_updated">Exercise updated</string>
+    <string name="exercise_not_saved">Exercise not saved</string>
+    <string name="review_exercise">Review exercise</string>
+    <string name="start_course">Start course</string>
+    <string name="course_activity">Started course</string>
+    <string name="app_description">Mobile application for outpatient rehabilitation procedures control</string>
+    <string name="time_remaining">"Time remaining: "</string>
+    <string name="pause">Pause</string>
+    <string name="perform_exercise">Perform exercise</string>
 
 </resources>

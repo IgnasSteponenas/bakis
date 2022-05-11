@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">bakis</string>
+    <string name="app_name">Reabilitacijos programėlė</string>
     <string name="navigation_drawer_open">Atidaryti naršymo meniu</string>
     <string name="navigation_drawer_close">Uždaryti naršymo meniu</string>
     <string name="hello_blank_fragment">Labas tuščias fragmente</string>
     <string name="test">testas</string>
     <string name="all_courses">Visi kursai</string>
     <string name="my_created_courses">Mano sukurti kursai</string>
-    <string name="my_liked_courses">Man patinkę kursai</string>
+    <string name="my_liked_courses">Man patikę kursai</string>
     <string name="statistics">Statistikos</string>
     <string name="all_exercises">Visi pratimai</string>
     <string name="my_created_exercises">Mano sukurti pratimai</string>
@@ -19,4 +19,28 @@
     <string name="description">Aprašymas</string>
     <string name="number_of_exercises">0</string>
     <string name="number_of_exercises_text">Pratimai</string>
+    <string name="repeats">Pakartojimai</string>
+    <string name="time_per_repeat">Vieno pakartojimo laikas (sec.)</string>
+    <string name="review_course">Kurso peržiūra</string>
+    <string name="add_exercise">Pridėti pratimą</string>
+    <string name="edit_exercise">Redaguoti pratimą</string>
+    <string name="edit_course">Redaguoti kursą</string>
+    <string name="add_course">Pridėti kursą</string>
+    <string name="course_added">Kursas pridėtas</string>
+    <string name="course_not_saved">Kurso nepavyko išsaugoti</string>
+    <string name="choose_repeat_time_per_repeat">Pasirinkite pakartojimų skaičių ir vieno pakartojimo laiką</string>
+    <string name="insert_title_description">Pasirinkite pavadinimą ir aprašymą</string>
+    <string name="course_deleted">Kursas ištrintas</string>
+    <string name="exercise_deleted">Pratimas ištrintas</string>
+    <string name="exercise_saved">Pratimas išsaugotas</string>
+    <string name="exercise_not_updated">Pratimas negali būti atnaujintas</string>
+    <string name="exercise_updated">Pratimas atnaujintas</string>
+    <string name="exercise_not_saved">Pratimas negalėjo būti išsaugotas</string>
+    <string name="review_exercise">Pratimo peržiūra</string>
+    <string name="start_course">Pradėti kursą</string>
+    <string name="course_activity">Pradėtas kursas</string>
+    <string name="app_description">Ambulatorinių reabilitacijos procedūrų kontroliavimo mobili programėlė</string>
+    <string name="time_remaining">"Liko laiko: "</string>
+    <string name="pause">Pauzė</string>
+    <string name="perform_exercise">Atlikite pratimą</string>
 </resources>

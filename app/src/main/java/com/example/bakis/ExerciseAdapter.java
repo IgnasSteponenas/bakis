@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import pl.droidsonroids.gif.GifImageView;
 
@@ -29,8 +30,15 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
     @Override
     public void onBindViewHolder(@NonNull ExerciseHolder holder, int position) {
         Exercise currentExercise = exercises.get(position);
-        holder.textViewTitle.setText(currentExercise.getTitle());
-        holder.textViewDescription.setText(currentExercise.getDescription());
+
+        if(Locale.getDefault().getLanguage().equals("lt") && currentExercise.getTitleInLithuanian() != null){
+            holder.textViewTitle.setText(currentExercise.getTitleInLithuanian());
+            holder.textViewDescription.setText(currentExercise.getDescriptionInLithuanian());
+        }else {
+            holder.textViewTitle.setText(currentExercise.getTitleInEnglish());
+            holder.textViewDescription.setText(currentExercise.getDescriptionInEnglish());
+        }
+
         if(currentExercise.getGif()==0)//default gif
             holder.gifImageView.setImageResource(R.drawable.defaultgif);
         else

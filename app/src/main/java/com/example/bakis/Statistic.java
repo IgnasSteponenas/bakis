@@ -3,8 +3,8 @@ package com.example.bakis;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.sql.Date;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity(tableName = "statistics_table")
 public class Statistic {
@@ -25,8 +25,8 @@ public class Statistic {
         this.exercisesRepetitionsAttempted = exercisesRepetitionsAttempted;
     }
 
-    public Statistic(Date dateOfExercise) {
-        this.dateOfExercise = dateOfExercise;
+    public void setStatisticId(int statisticId) {
+        this.statisticId = statisticId;
     }
 
     public int getStatisticId() {

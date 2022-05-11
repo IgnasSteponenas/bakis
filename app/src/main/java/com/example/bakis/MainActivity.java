@@ -1,10 +1,12 @@
 package com.example.bakis;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -31,13 +33,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        int test = 20;
-
         //drawer
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.drawer_layout);
+
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
@@ -109,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_createdExercises:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new CreatedExercises()).commit();
-                break;
+                break;/*
             case R.id.changeLanguage:
                 //handled with showPopup
                 break;
@@ -118,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 break;
             case R.id.login:
                 Toast.makeText(this, "login yra", Toast.LENGTH_SHORT).show();
-                break;
+                break;*/
         }
 
         drawer.closeDrawer(GravityCompat.START);

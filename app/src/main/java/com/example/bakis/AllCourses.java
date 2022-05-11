@@ -17,10 +17,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Locale;
 
 public class AllCourses extends Fragment {
 
     private CourseViewModel courseViewModel;
+    private CourseWithExercises courseWithExercises;
     private CourseExerciseCrossRefViewModel courseExerciseCrossRefViewModel;
     //public static final int REVIEW_EXERCISE_REQUEST = 3;
     private Context context;
@@ -30,6 +32,8 @@ public class AllCourses extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_allcourses, container, false);
+
+        getActivity().setTitle(R.string.all_courses);
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view_all_courses);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
@@ -41,6 +45,9 @@ public class AllCourses extends Fragment {
         recyclerView.setAdapter(adapter);
 
         courseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
+        courseExerciseCrossRefViewModel = new ViewModelProvider(this).get(CourseExerciseCrossRefViewModel.class);
+
+        adapter.setCourseExerciseCrossRefViewModel(courseExerciseCrossRefViewModel);
         adapter.setCourseViewModel(courseViewModel);
 
         courseViewModel.getAllCourses().observe(getViewLifecycleOwner(), new Observer<List<Course>>() {
@@ -50,11 +57,16 @@ public class AllCourses extends Fragment {
             }
         });
 
-        adapter.setOnItemClickListener(new CourseAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new CourseAdapter.OnItemClickListener() {//TODO ReviewCourse keistas daiktas
             @Override
             public void onItemClick(Course course) {
                 Intent intent = new Intent(context, ReviewCourse.class);
-                intent.putExtra(ReviewCourse.EXTRA_COURSE_TITLE, course.getTitle());
+
+                if(Locale.getDefault().getLanguage().equals("lt") && course.getTitleInLithuanian() != null)
+                    intent.putExtra(ReviewCourse.EXTRA_COURSE_TITLE, course.getTitleInLithuanian());
+                else
+                    intent.putExtra(ReviewCourse.EXTRA_COURSE_TITLE, course.getTitleInEnglish());
+
                 intent.putExtra(ReviewCourse.EXTRA_COURSE_ID, String.valueOf(course.getCourseId()));
                 startActivity(intent);
             }

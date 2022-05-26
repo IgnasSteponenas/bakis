@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/text_view_course_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:ellipsize="end"
+            android:paddingLeft="8dp"
+            android:singleLine="true"
+            android:text="@string/title"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/text_view_exercises_done"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_view_course_title"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:paddingLeft="8dp"
+            android:text="0/0" />
+
+        <TextView
+            android:id="@+id/text_view_exercise_repeats_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_view_course_title"
+            android:layout_toEndOf="@+id/text_view_exercises_done"
+            android:ellipsize="end"
+            android:paddingLeft="8dp"
+            android:text="@string/exercises_done" />
+
+        <TextView
+            android:id="@+id/text_view_exercise_time_taken"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_view_course_title"
+            android:layout_alignParentEnd="true"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:paddingLeft="8dp"
+            android:text="00:00" />
+
+        <TextView
+            android:id="@+id/text_view_exercise_time_taken_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/text_view_course_title"
+            android:layout_toStartOf="@+id/text_view_exercise_time_taken"
+            android:ellipsize="end"
+            android:paddingLeft="8dp"
+            android:text="@string/time_taken" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

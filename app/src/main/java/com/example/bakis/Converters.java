@@ -26,4 +26,14 @@ public class Converters {
     public int[] fromGsonToIntArray(String string){
         return new Gson().fromJson(string, int[].class);
     }
+
+    @TypeConverter
+    public String fromBooleanArrayToString(boolean[] booleans){
+        return new Gson().toJson(booleans);
+    }
+
+    @TypeConverter
+    public boolean[] fromGsonToBooleanArray(String string){
+        return new Gson().fromJson(string, boolean[].class);
+    }
 }

@@ -43,4 +43,7 @@
     <string name="time_remaining">"Liko laiko: "</string>
     <string name="pause">Pauzė</string>
     <string name="perform_exercise">Atlikite pratimą</string>
+    <string name="time_taken">Užtruko laiko</string>
+    <string name="course_title">Kurso pavadinimas</string>
+    <string name="exercises_done">Atlikti pratimai</string>
 </resources>

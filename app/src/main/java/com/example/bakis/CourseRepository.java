@@ -43,6 +43,10 @@ public class CourseRepository {
         return new CourseRepository.GetCourseByRowId(courseDao).execute(rowid).get();
     }
 
+    public Course getCourseById (Integer id) throws ExecutionException, InterruptedException {
+        return new CourseRepository.GetCourseById(courseDao).execute(id).get();
+    }
+
     public LiveData<List<Course>> getAllCourses(){return allCourses;}
 
     public LiveData<List<Course>> getAllLikedCourses(){return allLikedCourses;}
@@ -61,6 +65,21 @@ public class CourseRepository {
             Course course;
 
             course = courseDao.getCourseByRowId(longs[0]);
+
+            return course;
+        }
+    }
+
+    private static class GetCourseById extends AsyncTask<Integer, Void, Course>{
+        private CourseDao courseDao;
+
+        private GetCourseById(CourseDao courseDao) {this.courseDao = courseDao;}
+
+        @Override
+        protected Course doInBackground(Integer... integers) {
+            Course course;
+
+            course = courseDao.getCourseById(integers[0]);
 
             return course;
         }

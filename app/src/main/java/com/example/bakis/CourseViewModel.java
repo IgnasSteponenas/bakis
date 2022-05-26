@@ -33,6 +33,10 @@ public class CourseViewModel extends AndroidViewModel {
         return repository.getCourseByRowId(rowid);
     }
 
+    public Course getCourseById(Integer id) throws ExecutionException, InterruptedException {
+        return repository.getCourseById(id);
+    }
+
     public void update(Course course){
         repository.update(course);
     }

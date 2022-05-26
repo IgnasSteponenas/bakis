@@ -16,13 +16,23 @@ public class Statistic {
     private int courseAttemptedId;
     private int[] exercisesAttemptedIds;
     private int[] exercisesRepetitionsAttempted;
+    private boolean[] completedExercises;
 
-    public Statistic(Date dateOfExercise, int courseTimeTaken, int courseAttemptedId, int[] exercisesAttemptedIds, int[] exercisesRepetitionsAttempted) {
+    public Statistic(Date dateOfExercise, int courseTimeTaken, int courseAttemptedId, int[] exercisesAttemptedIds, int[] exercisesRepetitionsAttempted, boolean[] completedExercises) {
         this.dateOfExercise = dateOfExercise;
         this.courseTimeTaken = courseTimeTaken;
         this.courseAttemptedId = courseAttemptedId;
         this.exercisesAttemptedIds = exercisesAttemptedIds;
         this.exercisesRepetitionsAttempted = exercisesRepetitionsAttempted;
+        this.completedExercises = completedExercises;
+    }
+
+    public boolean[] getCompletedExercises() {
+        return completedExercises;
+    }
+
+    public void setCompletedExercises(boolean[] completedExercises) {
+        this.completedExercises = completedExercises;
     }
 
     public void setStatisticId(int statisticId) {

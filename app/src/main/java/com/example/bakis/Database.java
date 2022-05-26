@@ -9,6 +9,11 @@ import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import kotlin.jvm.Volatile;
 
 @androidx.room.Database(entities = {Exercise.class, Course.class, CourseExerciseCrossRef.class, Statistic.class}, version = 2)
@@ -21,6 +26,7 @@ public abstract class Database extends RoomDatabase {
     public abstract ExerciseDao exerciseDao();
     public abstract CourseDao courseDao();
     public abstract CourseExerciseCrossRefDao courseExerciseCrossRefDao();
+    public abstract StatisticDao statisticDao();
 
     public static synchronized Database getInstance(Context context){
         if (instance == null){
@@ -45,11 +51,13 @@ public abstract class Database extends RoomDatabase {
         private ExerciseDao exerciseDao;
         private CourseDao courseDao;
         private CourseExerciseCrossRefDao courseExerciseCrossRefDao;
+        private StatisticDao statisticDao;
 
         private PopulateDbAsyncTask(Database db){
             exerciseDao = db.exerciseDao();
             courseDao = db.courseDao();
             courseExerciseCrossRefDao = db.courseExerciseCrossRefDao();
+            statisticDao = db.statisticDao();
         }
 
         @Override
@@ -132,6 +140,49 @@ public abstract class Database extends RoomDatabase {
             /*courseWithExercises.
 
             System.out.println();*/
+            Calendar calendar;
+            SimpleDateFormat dateFormat;
+            String dateString;
+            Date sqliteDate = null;
+
+            calendar = Calendar.getInstance();
+            dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            dateString = dateFormat.format(calendar.getTime());
+            //System.out.println("/////////////////////////////////////"+dateString);
+            try {
+                sqliteDate = dateFormat.parse(dateString);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-M-dd");
+            String dateInString = "2022-05-17";
+            String dateInString2 = "2022-04-15";
+            String dateInString3 = "2022-05-13";
+            String dateInString4 = "2022-05-06";
+            Date date = new Date();
+            Date date2 = new Date();
+            Date date3 = new Date();;
+            Date date4 = new Date();;
+            try {
+                date = sdf.parse(dateInString);
+                date2 = sdf.parse(dateInString2);
+                date3 = sdf.parse(dateInString3);
+                date4 = sdf.parse(dateInString4);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            //DateAndCalendar obj = new DateAndCalendar();
+
+
+            int[] exerciseTemp = {1, 2, 3, 4};
+            int[] exerciseRepetitions = {10, 20, 30, 40};
+            boolean[] completed = {true, false, true, false};
+
+            statisticDao.insert(new Statistic(date, 20, 1, exerciseTemp, exerciseRepetitions, completed));
+            statisticDao.insert(new Statistic(date2, 20, 1, exerciseTemp, exerciseRepetitions, completed));
+            statisticDao.insert(new Statistic(date3, 20, 1, exerciseTemp, exerciseRepetitions, completed));
+            statisticDao.insert(new Statistic(date4, 20, 1, exerciseTemp, exerciseRepetitions, completed));
 
             return null;
         }

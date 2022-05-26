@@ -26,6 +26,10 @@ public interface CourseDao {
     @Query("SELECT * FROM course_table WHERE rowid = :myRowId")
     Course getCourseByRowId(Long myRowId);
 
+    @Transaction
+    @Query("SELECT * FROM course_table WHERE courseId = :courseId")
+    Course getCourseById(Integer courseId);
+
     @Query("SELECT * FROM course_table ORDER BY courseId DESC")
     LiveData<List<Course>> getAllCourses();
 

@@ -48,6 +48,7 @@ public class StartCourseActivity extends AppCompatActivity {
 
 
     CourseExerciseCrossRefViewModel courseExerciseCrossRefViewModel;
+    StatisticViewModel statisticViewModel;
 
     Intent intent;
     int courseId = -1;
@@ -76,6 +77,7 @@ public class StartCourseActivity extends AppCompatActivity {
     private int courseAttemptedId;
     private List<Integer> exercisesAttemptedIds = new ArrayList<>();
     private List<Integer> exercisesRepetitionsAttempted = new ArrayList<>();
+    private List<Boolean> exercisesCompleted = new ArrayList<>();
 
     private Calendar calendar;
     SimpleDateFormat dateFormat;
@@ -109,6 +111,7 @@ public class StartCourseActivity extends AppCompatActivity {
 
         intent = getIntent();
         courseExerciseCrossRefViewModel = new ViewModelProvider(this).get(CourseExerciseCrossRefViewModel.class);
+        statisticViewModel = new ViewModelProvider(this).get(StatisticViewModel.class);
 
         courseId = intent.getIntExtra(EXTRA_COURSE_ID, -1);
 
@@ -129,6 +132,8 @@ public class StartCourseActivity extends AppCompatActivity {
         } catch (ParseException e) {
             e.printStackTrace();
         }
+
+
         //System.out.println("/////////////data: " + date);
 
         currentExerciseIndex = 0;
@@ -219,6 +224,7 @@ public class StartCourseActivity extends AppCompatActivity {
             @Override
             public void onFinish() {
                 completedExercises++;
+                exercisesCompleted.set(currentExerciseIndex, true);
 
                 if(currentExerciseIndex < exercises.size()-1) {
                     currentExerciseIndex++;
@@ -323,16 +329,19 @@ public class StartCourseActivity extends AppCompatActivity {
         for(int i=0; i < exercises.size(); i++){
             exercisesAttemptedIds.add(exercises.get(i).getExerciseId());
             exercisesRepetitionsAttempted.add(0);
+            exercisesCompleted.add(false);
         }
     }
 
     public void changeToEndWindow(){
         int []exercisesIds = new int[exercisesAttemptedIds.size()];
         int []exercisesRepsAttempted = new int[exercisesAttemptedIds.size()];
+        boolean []completed = new boolean[exercisesAttemptedIds.size()];
 
         for(int i=0; i < exercisesAttemptedIds.size(); i++){
             exercisesIds[i] = exercisesAttemptedIds.get(i);
             exercisesRepsAttempted[i] = exercisesRepetitionsAttempted.get(i);
+            completed[i] = exercisesCompleted.get(i);
         }
 
         int minutes = (int) courseTimeTaken / 60;
@@ -345,7 +354,8 @@ public class StartCourseActivity extends AppCompatActivity {
         timeTakenString += seconds;
 
 
-        statistic = new Statistic(sqliteDate, courseTimeTaken, courseId, exercisesIds, exercisesRepsAttempted);
+        statistic = new Statistic(sqliteDate, courseTimeTaken, courseId, exercisesIds, exercisesRepsAttempted, completed);
+        statisticViewModel.insert(statistic);
 
         Intent intent = new Intent(StartCourseActivity.this, CourseEndActivity.class);
         intent.putExtra(CourseEndActivity.EXTRA_EXERCISES_ATTEMPTED, "" + completedExercises + "/"+ exercises.size());

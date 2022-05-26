@@ -24,6 +24,7 @@ public class AllCourses extends Fragment {
     private CourseViewModel courseViewModel;
     private CourseWithExercises courseWithExercises;
     private CourseExerciseCrossRefViewModel courseExerciseCrossRefViewModel;
+    private StatisticViewModel statisticViewModel;
     //public static final int REVIEW_EXERCISE_REQUEST = 3;
     private Context context;
 

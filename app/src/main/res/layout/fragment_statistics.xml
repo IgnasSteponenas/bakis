@@ -1,14 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_blue_light">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/holo_blue_light"
+    android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <com.applandeo.materialcalendarview.CalendarView
+        android:id="@+id/calendarStatistic"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Statistics Fragment"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"/>
+        app:headerColor="@android:color/holo_blue_light"
+        app:highlightedDaysLabelsColor="@android:color/holo_blue_light"
+        app:todayLabelColor="@android:color/holo_red_light" />
 
-</RelativeLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_view_statistics_on_that_day"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/statistic_item"/>
+
+</LinearLayout>

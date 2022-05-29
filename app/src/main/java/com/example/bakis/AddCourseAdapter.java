@@ -1,6 +1,7 @@
 package com.example.bakis;
 
 import android.content.Context;
+import android.net.Uri;
 import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -46,37 +47,34 @@ public class AddCourseAdapter extends RecyclerView.Adapter<AddCourseAdapter.AddC
     public void onBindViewHolder(@NonNull AddCourseHolder holder, int position) {
         Exercise currentExercise = exercises.get(position);
 
-        if(Locale.getDefault().getLanguage().equals("lt") && currentExercise.getTitleInLithuanian() != null) {
+        if (Locale.getDefault().getLanguage().equals("lt") && currentExercise.getTitleInLithuanian() != null) {
             holder.textViewTitle.setText(currentExercise.getTitleInLithuanian());
             holder.textViewDescription.setText(currentExercise.getDescriptionInLithuanian());
-        }else {
+        } else {
             holder.textViewTitle.setText(currentExercise.getTitleInEnglish());
             holder.textViewDescription.setText(currentExercise.getDescriptionInEnglish());
         }
         holder.textViewTitle.setTag(holder);
         holder.textViewDescription.setTag(holder);
-        //holder.repeats.setTag(holder);
-        //holder.timePerRepeat.setTag(holder);
 
-        if(currentExercise.getGif()==0) {//default gif
+        if (currentExercise.getGif() == 0) {//default gif
             holder.gifImageView.setImageResource(R.drawable.defaultgif);
             holder.gifImageView.setTag(holder);
-        }
-        else{
+        } else {
             holder.gifImageView.setImageResource(currentExercise.getGif());
             holder.gifImageView.setTag(holder);
         }
 
-        /*if(temp < selected.size()) {
-            for (int i = 0; i < selected.size(); i++) {
-                if (selected.get(i).getExerciseId() == currentExercise.getExerciseId()) {
-                    highlightView(holder);
-                    holder.repeats.setText(String.valueOf(selectedRepeats.get(i)));
-                    holder.timePerRepeat.setText(String.valueOf(selectedTimePerRepeat.get(i)));
-                    temp++;
-                }
-            }
-        }*/
+        if (currentExercise.getGif() == 0 && currentExercise.getUri() != null) {
+            holder.gifImageView.setImageURI(Uri.parse(currentExercise.getUri()));
+            holder.gifImageView.setTag(holder);
+        } else if (currentExercise.getGif() != 0 && currentExercise.getUri() == null) {
+            holder.gifImageView.setImageResource(currentExercise.getGif());
+            holder.gifImageView.setTag(holder);
+        } else {
+            holder.gifImageView.setImageResource(R.drawable.defaultgif);
+            holder.gifImageView.setTag(holder);
+        }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,15 +85,15 @@ public class AddCourseAdapter extends RecyclerView.Adapter<AddCourseAdapter.AddC
                     selectedTimePerRepeat.remove(index);
                     selected.remove(index);
                     unhighlightView(holder);
-                } else if(containsId(selected, currentExercise) == null
-                        && Integer.parseInt(holder.repeats.getText().toString())>0
-                        && Integer.parseInt(holder.timePerRepeat.getText().toString())>0 ) {
+                } else if (containsId(selected, currentExercise) == null
+                        && Integer.parseInt(holder.repeats.getText().toString()) > 0
+                        && Integer.parseInt(holder.timePerRepeat.getText().toString()) > 0) {
                     int index = selected.indexOf(containsId(selected, currentExercise));
                     selected.add(currentExercise);
                     selectedRepeats.add(Integer.parseInt(holder.repeats.getText().toString()));
                     selectedTimePerRepeat.add(Integer.parseInt(holder.timePerRepeat.getText().toString()));
                     highlightView(holder);
-                }else{
+                } else {
                     Toast.makeText(context, R.string.choose_repeat_time_per_repeat, Toast.LENGTH_SHORT).show();
                 }
             }
@@ -103,18 +101,18 @@ public class AddCourseAdapter extends RecyclerView.Adapter<AddCourseAdapter.AddC
 
         if (containsId(selected, currentExercise) != null) {
             highlightView(holder);
-            if(holder.repeats.getText().toString().equals("0")){
+            if (holder.repeats.getText().toString().equals("0")) {
                 int index = selected.indexOf(containsId(selected, currentExercise));
                 holder.repeats.setText(selectedRepeats.get(index).toString());
                 holder.timePerRepeat.setText(selectedTimePerRepeat.get(index).toString());
             }
-        }else {
+        } else {
             unhighlightView(holder);
         }
     }
 
     public Exercise containsId(List<Exercise> exercises, Exercise exercise) {
-        for (int i=0; i<exercises.size(); i++) {
+        for (int i = 0; i < exercises.size(); i++) {
             if (exercises.get(i).getExerciseId() == exercise.getExerciseId())
                 return exercises.get(i);
         }
@@ -142,9 +140,11 @@ public class AddCourseAdapter extends RecyclerView.Adapter<AddCourseAdapter.AddC
     public void setSelected(List<Exercise> selected) {
         this.selected = selected;
     }
+
     public void setSelectedRepeats(List<Integer> selectedRepeats) {
         this.selectedRepeats = selectedRepeats;
     }
+
     public void setSelectedTimePerRepeat(List<Integer> selectedTimePerRepeat) {
         this.selectedTimePerRepeat = selectedTimePerRepeat;
     }

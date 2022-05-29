@@ -1,5 +1,9 @@
 package com.example.bakis;
 
+import static android.content.Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION;
+import static android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION;
+import static android.content.Intent.FLAG_GRANT_WRITE_URI_PERMISSION;
+
 import androidx.annotation.AnyRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,8 +13,11 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.ParcelFileDescriptor;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +26,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.io.File;
+import java.io.FileDescriptor;
+import java.io.IOException;
+import java.net.URISyntaxException;
 
 import pl.droidsonroids.gif.GifImageView;
 
@@ -33,6 +45,7 @@ public class AddEditExercise extends AppCompatActivity {
             "com.example.bakis.EXTRA_GIF";
     int SELECT_IMAGE_CODE = 4;
     int PICK_PHOTO_FOR_AVATAR = 5;
+    int GET_IMAGE_BY_CODE = 6;
 
     private EditText editTextTitle;
     private EditText editTextDescription;
@@ -56,7 +69,8 @@ public class AddEditExercise extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent();
                 intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
+                intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
+                intent.setFlags(FLAG_GRANT_PERSISTABLE_URI_PERMISSION | FLAG_GRANT_READ_URI_PERMISSION | FLAG_GRANT_WRITE_URI_PERMISSION);
                 startActivityForResult(Intent.createChooser(intent, "Test"), SELECT_IMAGE_CODE);
             }
         });
@@ -67,55 +81,32 @@ public class AddEditExercise extends AppCompatActivity {
             setTitle(R.string.edit_exercise);
             editTextTitle.setText(intent.getStringExtra(EXTRA_TITLE));
             editTextDescription.setText(intent.getStringExtra(EXTRA_DESCRIPTION));
-            //TODO no permission to take image need to fix
-            //editGifImageView.setImageURI(Uri.parse(intent.getStringExtra(EXTRA_GIF)));
-            editGifImageView.setImageResource(R.drawable.defaultgif);//temp
+
             newUri = Uri.parse(intent.getStringExtra(EXTRA_GIF));
-            //tempResource = intent.getIntExtra(EXTRA_GIF, R.drawable.defaultgif);
+            editGifImageView.setImageURI(newUri);
+
         } else {
             setTitle(R.string.add_exercise);
             editGifImageView.setImageResource(R.drawable.defaultgif);
         }
     }
 
-    /*private void pickImage() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        startActivityForResult(intent, PICK_PHOTO_FOR_AVATAR);
-    }*/
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        final ContentResolver resolver = this.getContentResolver();
+        resolver.takePersistableUriPermission(data.getData(),
+                Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+
         if(requestCode == SELECT_IMAGE_CODE){
             newUri = data.getData();
             editGifImageView.setImageURI(newUri);
-        }/*else if(requestCode == PICK_PHOTO_FOR_AVATAR && resultCode == Activity.RESULT_OK){
-
-        }*/
-    }
-
-    /*public void pickImage() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
-        startActivityForResult(intent.setData(newUri), PICK_PHOTO_FOR_AVATAR);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_PHOTO_FOR_AVATAR && resultCode == Activity.RESULT_OK) {
-            if (data == null) {
-                //Display an error
-                return;
-            }
-            InputStream inputStream = context.getContentResolver().openInputStream(data.getData());
-            //Now you can do whatever you want with your inpustream, save it as file, upload to a server, decode a bitmap...
+        }else if(requestCode == GET_IMAGE_BY_CODE){
+            newUri = data.getData();
+            editGifImageView.setImageURI(newUri);
         }
-    }*/
-
-
+    }
 
     public static final Uri getUriToDrawable(@NonNull Context context,
                                              @AnyRes int drawableId) {
@@ -139,9 +130,10 @@ public class AddEditExercise extends AppCompatActivity {
         data.putExtra(EXTRA_TITLE, title);
         data.putExtra(EXTRA_DESCRIPTION, description);
         if(newUri != null && !newUri.equals(Uri.EMPTY))
-            data.putExtra(EXTRA_GIF, getUriToDrawable(this, R.drawable.defaultgif).toString());
-        else
             data.putExtra(EXTRA_GIF, newUri.toString());
+        else
+            data.putExtra(EXTRA_GIF, getUriToDrawable(this, R.drawable.defaultgif).toString());
+
 
         int id = getIntent().getIntExtra(EXTRA_ID, -1);
         if (id != -1){

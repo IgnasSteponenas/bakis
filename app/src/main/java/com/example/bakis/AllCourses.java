@@ -58,7 +58,7 @@ public class AllCourses extends Fragment {
             }
         });
 
-        adapter.setOnItemClickListener(new CourseAdapter.OnItemClickListener() {//TODO ReviewCourse keistas daiktas
+        adapter.setOnItemClickListener(new CourseAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Course course) {
                 Intent intent = new Intent(context, ReviewCourse.class);

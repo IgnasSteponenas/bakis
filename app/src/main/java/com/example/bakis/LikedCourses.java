@@ -1,6 +1,7 @@
 package com.example.bakis;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
+import java.util.Locale;
 
 public class LikedCourses extends Fragment {
 
@@ -50,16 +52,20 @@ public class LikedCourses extends Fragment {
             }
         });
 
-        /*adapter.setOnItemClickListener(new ExerciseAdapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new CourseAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(Exercise exercise) {
-                Intent intent = new Intent(context, ReviewExercise.class);
-                intent.putExtra(ReviewExercise.EXTRA_TITLE, exercise.getTitle());
-                intent.putExtra(ReviewExercise.EXTRA_DESCRIPTION, exercise.getDescription());
-                intent.putExtra(ReviewExercise.EXTRA_GIF, exercise.getGif());
+            public void onItemClick(Course course) {
+                Intent intent = new Intent(context, ReviewCourse.class);
+
+                if(Locale.getDefault().getLanguage().equals("lt") && course.getTitleInLithuanian() != null)
+                    intent.putExtra(ReviewCourse.EXTRA_COURSE_TITLE, course.getTitleInLithuanian());
+                else
+                    intent.putExtra(ReviewCourse.EXTRA_COURSE_TITLE, course.getTitleInEnglish());
+
+                intent.putExtra(ReviewCourse.EXTRA_COURSE_ID, String.valueOf(course.getCourseId()));
                 startActivity(intent);
             }
-        });*/
+        });
 
         return view;
     }

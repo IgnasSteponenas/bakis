@@ -1,5 +1,6 @@
 package com.example.bakis;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,10 +40,12 @@ public class ExerciseAdapter extends RecyclerView.Adapter<ExerciseAdapter.Exerci
             holder.textViewDescription.setText(currentExercise.getDescriptionInEnglish());
         }
 
-        if(currentExercise.getGif()==0)//default gif
-            holder.gifImageView.setImageResource(R.drawable.defaultgif);
-        else
+        if(currentExercise.getGif()==0 && currentExercise.getUri()!=null)//default gif
+            holder.gifImageView.setImageURI(Uri.parse(currentExercise.getUri()));
+        else if (currentExercise.getGif()!=0 && currentExercise.getUri()==null)
             holder.gifImageView.setImageResource(currentExercise.getGif());
+        else
+            holder.gifImageView.setImageResource(R.drawable.defaultgif);
     }
 
     @Override

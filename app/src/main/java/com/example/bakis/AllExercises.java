@@ -68,6 +68,7 @@ public class AllExercises extends Fragment {
                     intent.putExtra(ReviewExercise.EXTRA_DESCRIPTION, exercise.getDescriptionInEnglish());
                 }
                 intent.putExtra(ReviewExercise.EXTRA_GIF, exercise.getGif());
+                intent.putExtra(ReviewExercise.EXTRA_URI, exercise.getUri());
                 startActivity(intent);
             }
         });

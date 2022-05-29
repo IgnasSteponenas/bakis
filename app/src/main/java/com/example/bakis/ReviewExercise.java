@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.MenuItem;
@@ -19,6 +20,8 @@ public class ReviewExercise extends AppCompatActivity {
             "com.example.bakis.EXTRA_DESCRIPTION";
     public static final String EXTRA_GIF =
             "com.example.bakis.EXTRA_GIF";
+    public static final String EXTRA_URI =
+            "com.example.bakis.EXTRA_URI";
 
     private TextView reviewTextTitle;
     private TextView reviewTextDescription;
@@ -44,7 +47,17 @@ public class ReviewExercise extends AppCompatActivity {
 
         reviewTextTitle.setText(intent.getStringExtra(EXTRA_TITLE));
         reviewTextDescription.setText(intent.getStringExtra(EXTRA_DESCRIPTION));
-        reviewGifImageView.setImageResource(intent.getIntExtra(EXTRA_GIF, R.drawable.defaultgif));
+
+        int gif = intent.getIntExtra(EXTRA_GIF, 0);
+        String uri = intent.getStringExtra(EXTRA_URI);
+
+        if (gif == 0 && uri != null) {
+            reviewGifImageView.setImageURI(Uri.parse(uri));
+        } else if (gif != 0 && uri == null) {
+            reviewGifImageView.setImageResource(gif);
+        } else {
+            reviewGifImageView.setImageResource(R.drawable.defaultgif);
+        }
     }
 
     @Override
